@@ -1,0 +1,157 @@
+<section
+  id="product-filter-{{ section.id }}"
+  class="product-filter"
+  
+>
+  <div class="container">
+  <div class="product-filter__inner"
+  style="
+    {% if section.settings.bg_image %}
+      background-image: url({{ section.settings.bg_image | image_url: width: 2000 }});
+    {% endif %}
+  ">
+<div class="filter-headinbg-block">
+    {% if section.settings.title != blank %}
+      <h2 style="font-size: {{ section.settings.heading_size }}px;">
+        {{ section.settings.title }}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.description != blank %}
+      <div style="font-size: {{ section.settings.description_size }}px;">
+        {{ section.settings.description }}
+      </div>
+    {% endif %}
+</div>
+    {% if section.blocks.size > 0 %}
+      <div class="product-filter__blocks">
+        {% for block in section.blocks %}
+          <div {{ block.shopify_attributes }}>
+            {% case block.type %}
+
+              {% when '@app' %}
+                {% render block %}
+
+              {% when 'custom_html' %}
+                {{ block.settings.html }}
+
+            {% endcase %}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  </div>
+
+  <style>
+    .filter-headinbg-block{
+      text-align: center;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    #product-filter-{{ section.id }} .product-filter__inner {
+      padding: 60px;
+      min-height: 330px;
+    }
+    .filter-headinbg-block h2 {
+        margin-bottom: 0px;
+        font-weight: 600;
+        line-height: 120%;
+    }
+    .product-filter__blocks .easysearch-select-holder label {
+        display: none;
+    }
+    .product-filter__blocks .easysearch-select-holder select {
+      min-height: 50px;
+      border: none;
+      opacity: 1 !important;
+  }
+  .product-filter__blocks .easysearch-holder #easysearch-search {
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    min-width: 120px;
+    text-transform: uppercase;
+}
+@media screen and (max-width: 749px) {
+      .product-filter__blocks .easysearch-select-holder select, .product-filter__blocks .easysearch-holder #easysearch-search {
+        min-height: 36px;
+      }
+  #product-filter-{{ section.id }} .product-filter__inner {
+      padding: 20px;
+    }
+    .filter-headinbg-block h2{
+      font-size: 25px !important;
+    }
+    .easysearch-container{
+    padding-block:0px !important;}
+  }
+  </style>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "Product Filter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "SELECT YOUR VEHICLE"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "OVER 120,000 AUTOMOTIVE AND TRUCK PARTS"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size (px)",
+      "min": 20,
+      "max": 80,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "label": "Description size (px)",
+      "min": 12,
+      "max": 30,
+      "default": 16
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "custom_html",
+      "name": "Custom HTML",
+      "settings": [
+        {
+          "type": "html",
+          "id": "html",
+          "label": "HTML"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Filter",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,118 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "text-with-icons": {
+      "type": "text-with-icons",
+      "blocks": {
+        "item-1": {
+          "type": "item",
+          "settings": {
+            "icon": "bi-delivery",
+            "title": "Free shipping",
+            "content": "<p>Short content about your store</p>"
+          }
+        },
+        "item-2": {
+          "type": "item",
+          "settings": {
+            "icon": "bi-returns",
+            "title": "Satisfied or refunded",
+            "content": "<p>Short content about your store</p>"
+          }
+        },
+        "item-3": {
+          "type": "item",
+          "settings": {
+            "icon": "bi-customer-support",
+            "title": "Top-notch support",
+            "content": "<p>Short content about your store</p>"
+          }
+        },
+        "item-4": {
+          "type": "item",
+          "settings": {
+            "icon": "bi-secure-payment",
+            "title": "Secure payments",
+            "content": "<p>Short content about your store</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item-1",
+        "item-2",
+        "item-3",
+        "item-4"
+      ],
+      "disabled": true,
+      "settings": {
+        "stack_mobile": false
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "footer-0": {
+          "type": "text",
+          "settings": {
+            "title": "Contact Us",
+            "content": "<p>Wings West International<br/>(818)350-4418<br/>\t\t\t\t\t\tinfo@wingswest.com\t\t<br/>Mon-Fri 10:00AM to 5:00PM<br/>\t\t\t\t\t\t\t</p>"
+          }
+        },
+        "links_UXUfYM": {
+          "type": "links",
+          "settings": {
+            "menu": ""
+          }
+        },
+        "footer-1": {
+          "type": "links",
+          "settings": {
+            "menu": "quick-search"
+          }
+        },
+        "links_Cz4TtU": {
+          "type": "links",
+          "settings": {
+            "menu": "customer-service"
+          }
+        },
+        "footer-2": {
+          "type": "newsletter",
+          "settings": {
+            "title": "Newsletter",
+            "subheading": "<p>A short sentence describing what someone will receive by subscribing</p>"
+          }
+        }
+      },
+      "block_order": [
+        "footer-0",
+        "links_UXUfYM",
+        "footer-1",
+        "links_Cz4TtU",
+        "footer-2"
+      ],
+      "custom_css": [],
+      "settings": {
+        "show_social_media": true,
+        "enable_follow_on_shop": true,
+        "show_payment_icons": true,
+        "show_locale_selector": true,
+        "show_country_selector": true
+      }
+    }
+  },
+  "order": [
+    "text-with-icons",
+    "footer"
+  ]
+}

@@ -1,0 +1,118 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "settings": {
+        "background": "#ff2d37",
+        "text_color": "#ffffff",
+        "font_size": 14,
+        "text_weight": "normal",
+        "vertical_padding": 13,
+        "show_social_icon": true,
+        "facebook_url": "https://www.facebook.com/wingswestinternational/",
+        "announcement_text": "",
+        "link_1_text": "FAQ",
+        "link_1_url": "shopify://pages/faq",
+        "link_2_text": "Sign In",
+        "link_2_url": "https://wingswest.myshopify.com/account/login",
+        "link_3_text": "Create an Account",
+        "link_3_url": "https://wingswest.myshopify.com/account/register",
+        "link_4_text": "",
+        "link_4_url": "",
+        "show_newsletter": false,
+        "newsletter_title": "Newsletter",
+        "newsletter_content": "<p>Subscribe to get notified about product launches, special offers and news</p>"
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "mega_menu_4XhWcG": {
+          "type": "mega_menu",
+          "disabled": true,
+          "settings": {
+            "menu_item": "",
+            "image_1_heading": "Your image",
+            "image_1_text": "Tell your story",
+            "image_1_link": "",
+            "image_2_heading": "Your image",
+            "image_2_text": "Tell your story",
+            "image_2_link": ""
+          }
+        },
+        "mega_menu_jbmAbF": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "PRODUCTS",
+            "image_1": "shopify://shop_images/T198674850.png",
+            "image_1_heading": "Hood",
+            "image_1_text": "",
+            "image_1_link": "shopify://collections/hood-1",
+            "image_2_heading": "Your image",
+            "image_2_text": "Tell your story",
+            "image_2_link": ""
+          }
+        },
+        "mega_menu_8VMwTm": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "About",
+            "image_1_heading": "Your image",
+            "image_1_text": "Tell your story",
+            "image_1_link": "",
+            "image_2_heading": "Your image",
+            "image_2_text": "Tell your story",
+            "image_2_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "mega_menu_4XhWcG",
+        "mega_menu_jbmAbF",
+        "mega_menu_8VMwTm"
+      ],
+      "custom_css": [],
+      "settings": {
+        "enable_sticky_header": true,
+        "logo": "shopify://shop_images/WingsWest-2_Logo.jpg",
+        "logo_max_width": 180,
+        "mobile_logo_max_width": 100,
+        "show_locale_selector": true,
+        "show_country_selector": false,
+        "navigation_menu": "main-menu-1",
+        "navigation_mobile_menu": "header-menu",
+        "desktop_navigation_layout": "inline",
+        "desktop_navigation_open_trigger": "hover",
+        "show_navigation_social_media": true,
+        "navigation_phone_number": "Call us 000-000-0000",
+        "navigation_email": "info@yourwebsite.com",
+        "show_condensed_search": false,
+        "show_search_filter": false,
+        "search_menu": "",
+        "show_search_menu_title": true
+      }
+    },
+    "1766728631c6e18047": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header",
+    "1766728631c6e18047"
+  ]
+}

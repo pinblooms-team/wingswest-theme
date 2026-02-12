@@ -1,0 +1,533 @@
+<div {% if page.handle != 'contact' %}class="section"{% endif %}>
+  <div class="container container--medium">
+    <div class="contact-wrapper">
+      {%- if section.settings.show_contact_image -%}
+        <div class="contact-image">
+          {%- if section.settings.contact_image -%}
+            <img src="{{ section.settings.contact_image | img_url: '600x' }}" 
+                 alt="{{ section.settings.contact_image.alt | escape }}" 
+                 loading="lazy">
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="contact-content">
+        <h2 class="contact-heading">{{ section.settings.heading | default: 'CONTACT US' }}</h2>
+
+        {%- if section.settings.show_company_info -%}
+          <div class="company-info">
+            {%- if section.settings.company_heading != blank -%}
+              <h3 class="company-info__heading">{{ section.settings.company_heading }}</h3>
+            {%- endif -%}
+            
+            {%- if section.settings.company_address != blank -%}
+              <div class="company-info__address">
+                {{ section.settings.company_address }}
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.phone != blank or section.settings.fax != blank -%}
+              <div class="company-info__contact">
+                {%- if section.settings.phone != blank -%}
+                  <p>Tel: {{ section.settings.phone }}</p>
+                {%- endif -%}
+                {%- if section.settings.fax != blank -%}
+                  <p>Fax: {{ section.settings.fax }}</p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.show_email_contacts -%}
+              <div class="company-info__emails">
+                <h4>E-mail Contacts:</h4>
+                {%- if section.settings.general_email != blank -%}
+                  <p>Wholesale Inquiries: <a href="mailto:{{ section.settings.general_email }}">{{ section.settings.general_email }}</a></p>
+                {%- endif -%}
+                {%- if section.settings.product_email != blank -%}
+                  <p>Product Inquiries: <a href="mailto:{{ section.settings.product_email }}">{{ section.settings.product_email }}</a></p>
+                {%- endif -%}
+                {%- if section.settings.order_email != blank -%}
+                  <p>Order Status: <a href="mailto:{{ section.settings.order_email }}">{{ section.settings.order_email }}</a></p>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.additional_text != blank -%}
+              <div class="company-info__additional">
+                {{ section.settings.additional_text }}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- form 'contact', class: 'contact-form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="alert alert--success">{{ 'contact.form.successfully_sent' | t }}</p>
+          {%- endif -%}
+
+          {%- if form.errors -%}
+            <div class="alert alert--error" id="contact-form-error">
+              <ul class="alert__error-list" role="list">
+                {%- for field in form.errors -%}
+                  {%- if field == 'form' -%}
+                    <li class="alert__error-item">{{ form.errors.messages[field] }}</li>
+                  {%- else -%}
+                    <li class="alert__error-item">{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}</li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
+          <div class="form-row">
+            <div class="form-field">
+              <input id="contact-name" 
+                     type="text" 
+                     name="contact[name]" 
+                     placeholder="Name" 
+                     required 
+                     {% if customer %}value="{{ customer.name }}"{% endif %}>
+            </div>
+
+            <div class="form-field">
+              <input id="contact-email" 
+                     type="email" 
+                     name="contact[email]" 
+                     placeholder="Email" 
+                     required 
+                     {% if customer %}value="{{ customer.email }}"{% endif %}>
+            </div>
+          </div>
+
+          <div class="form-field form-field--full">
+            <input id="contact-phone" 
+                   type="tel" 
+                   name="contact[phone]" 
+                   placeholder="Phone Number">
+          </div>
+
+          {%- for block in section.blocks -%}
+            {%- assign field_title = block.settings.title -%}
+
+            {%- if field_title == blank -%}
+              {%- capture field_title -%}Custom field {% increment custom_field %}{%- endcapture -%}
+            {%- endif -%}
+
+            {%- if block.type == 'text' -%}
+              <div class="form-field form-field--full">
+                {%- if block.settings.use_long_text -%}
+                  <textarea id="contact-{{ field_title | handle }}" 
+                            name="contact[{{ field_title | escape }}]" 
+                            rows="5" 
+                            placeholder="{{ block.settings.title | escape }}"
+                            {% if block.settings.is_required %}required{% endif %}></textarea>
+                {%- else -%}
+                  <input id="contact-{{ field_title | handle }}" 
+                         type="text" 
+                         name="contact[{{ field_title | escape }}]" 
+                         placeholder="{{ block.settings.title | escape }}"
+                         {% if block.settings.is_required %}required{% endif %}>
+                {%- endif -%}
+              </div>
+            {%- elsif block.type == 'dropdown' -%}
+              {%- assign values = block.settings.values | split: ',' -%}
+
+              {%- if values != empty -%}
+                <div class="form-field form-field--full">
+                  <select id="contact-{{ field_title | handle }}" 
+                          name="contact[{{ field_title | escape }}]" 
+                          required>
+                    <option value="" disabled selected>{{ block.settings.title | escape }}</option>
+                    {%- for value in values -%}
+                      {%- assign trim_value = value | strip -%}
+                      <option value="{{ trim_value | escape }}">{{ trim_value | escape }}</option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          <div class="form-field form-field--full">
+            <textarea id="contact-message" 
+                      name="contact[body]" 
+                      rows="5" 
+                      placeholder="Leave A Comment" 
+                      required></textarea>
+          </div>
+
+          {% comment %} {%- if section.settings.enable_recaptcha -%}
+            <div class="form-field form-field--full">
+              <div class="g-recaptcha" data-sitekey="{{ section.settings.recaptcha_site_key }}"></div>
+            </div>
+          {%- endif -%} {% endcomment %}
+
+          <button type="submit" class="contact-submit">
+            {{ section.settings.submit_text | default: 'SUBMIT' }}
+          </button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% comment %} {%- if section.settings.enable_recaptcha -%}
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{%- endif -%} {% endcomment %}
+
+<style>
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 40px;
+  margin: 40px 0;
+}
+
+.contact-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.contact-content {
+  padding: 0 20px;
+}
+
+.contact-heading {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.company-info {
+  margin-bottom: 30px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #666;
+}
+
+.company-info__heading {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.company-info__address {
+  margin-bottom: 15px;
+}
+
+.company-info__contact {
+  margin-bottom: 15px;
+}
+
+.company-info__emails {
+  margin-bottom: 15px;
+}
+
+.company-info__emails h4 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.company-info__emails p {
+  margin: 5px 0;
+}
+
+.company-info__emails a {
+  color: var(--heading-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.company-info__emails a:hover {
+  color:var(--primary-button-background);
+}
+
+.company-info__additional {
+  margin-top: 15px;
+  font-size: 13px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.3s;
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  outline: none;
+  border-color: #999;
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.contact-submit {
+  background-color: #e60012;
+  color: white;
+  border: none;
+  padding: 14px 40px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contact-submit:hover {
+  background-color: #cc0010;
+}
+
+.alert {
+  padding: 15px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.alert--success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert--error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.alert__error-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-image {
+    max-height: 300px;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-heading {
+    font-size: 24px;
+  }
+  
+  .contact-content {
+    padding: 0 10px;
+  }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Contact Form",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General Settings"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "CONTACT US"
+    },
+    {
+      "type": "text",
+      "id": "submit_text",
+      "label": "Submit Button Text",
+      "default": "SUBMIT"
+    },
+    {
+      "type": "header",
+      "content": "Contact Image"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_contact_image",
+      "label": "Show contact image",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "contact_image",
+      "label": "Contact image",
+      "info": "Recommended size: 600 x 700px"
+    },
+    {
+      "type": "header",
+      "content": "Company Information"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_company_info",
+      "label": "Show company information",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "company_heading",
+      "label": "Company info heading",
+      "default": "Corporate Headquarters:"
+    },
+    {
+      "type": "textarea",
+      "id": "company_address",
+      "label": "Company address",
+      "default": "Wings West International Inc. B\n26465 E. Walnut Dr. North\nCity Of Industry, Ca 91789\nUnited States"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone number",
+      "default": "(818)350-4416"
+    },
+    {
+      "type": "text",
+      "id": "fax",
+      "label": "Fax number",
+      "default": "(323)662-1241"
+    },
+    {
+      "type": "header",
+      "content": "Email Contacts"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_email_contacts",
+      "label": "Show email contacts",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "general_email",
+      "label": "Wholesale Inquiries",
+      "default": "wingswest@wingswes.com"
+    },
+    {
+      "type": "text",
+      "id": "product_email",
+      "label": "Product inquiries email",
+      "default": "info@wingswest.com"
+    },
+    {
+      "type": "text",
+      "id": "order_email",
+      "label": "Order status email",
+      "default": "info@wingswest.com"
+    },
+    {
+      "type": "textarea",
+      "id": "additional_text",
+      "label": "Additional text",
+      "default": "We love to hear from you! Please let us know if you have any questions or concerns and we will get back to you within 2 business days. Thanks!"
+    },
+    {
+      "type": "header",
+      "content": "reCAPTCHA"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_recaptcha",
+      "label": "Enable reCAPTCHA",
+      "default": false,
+      "info": "You need to add your reCAPTCHA site key below"
+    },
+    {
+      "type": "text",
+      "id": "recaptcha_site_key",
+      "label": "reCAPTCHA Site Key",
+      "info": "Get your site key from Google reCAPTCHA"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text field",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Field label",
+          "default": "Custom field"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_long_text",
+          "label": "Use textarea",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "is_required",
+          "label": "Required field",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "dropdown",
+      "name": "Dropdown",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Field label",
+          "default": "Select option"
+        },
+        {
+          "type": "text",
+          "id": "values",
+          "label": "Dropdown values",
+          "info": "Separate each value with a comma",
+          "default": "Option 1, Option 2, Option 3"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Form",
+      "category": "Contact"
+    }
+  ]
+}
+{% endschema %}

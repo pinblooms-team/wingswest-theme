@@ -1,0 +1,112 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "product_meta": {
+          "type": "product_meta",
+          "settings": {
+            "show_vendor": true,
+            "show_sku": false,
+            "show_reviews_badge": false,
+            "show_share_buttons": true
+          }
+        },
+        "variant_selector": {
+          "type": "variant_selector",
+          "settings": {
+            "selector_mode": "block",
+            "color_mode": "swatch",
+            "variant_image_options": "",
+            "show_quantity_selector": true,
+            "show_taxes_included": false,
+            "show_inventory_quantity": false,
+            "low_inventory_threshold": 0,
+            "progress_bar_max_value": 50
+          }
+        },
+        "wishlist_power_block_wishlist_product_page_button_KUDFba": {
+          "type": "shopify://apps/wishlist-power/blocks/block-wishlist-product-page-button/c6cb23f2-39d1-403f-9967-53314ebdad10",
+          "settings": {
+            "add_to_wishlist_label": "",
+            "remove_from_wishlist_label": "",
+            "button_style": "fill",
+            "button_height": 40,
+            "button_vertical_spacing": 0,
+            "button_stretch": false,
+            "button_justify_self": "start",
+            "border_radius": 4,
+            "icon_name": "heart",
+            "icon_size": 18,
+            "icon_thickness": 2,
+            "button_background": "#ff0a0a",
+            "button_text": "#ffffff"
+          }
+        },
+        "wishlist_wishify_wishify_product_8mFbWn": {
+          "type": "shopify://apps/wishlist-wishify/blocks/wishify-product/e14a43b5-34c6-492d-b46f-3ad2eda08696",
+          "disabled": true,
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "display_mode": "view_more"
+          }
+        }
+      },
+      "block_order": [
+        "product_meta",
+        "variant_selector",
+        "wishlist_power_block_wishlist_product_page_button_KUDFba",
+        "wishlist_wishify_wishify_product_8mFbWn",
+        "buy_buttons",
+        "description"
+      ],
+      "settings": {
+        "image_size": "small",
+        "enable_video_looping": false,
+        "enable_image_zoom": true,
+        "zoom_effect": "outside",
+        "carousel_effect": "fade"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You may also like",
+        "show_quick_buy": false,
+        "visible_products": 3
+      }
+    },
+    "recently-viewed-products": {
+      "type": "recently-viewed-products",
+      "settings": {
+        "title": "Recently viewed",
+        "show_quick_buy": false,
+        "visible_products": 3
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product-recommendations",
+    "recently-viewed-products"
+  ]
+}

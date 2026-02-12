@@ -1,0 +1,823 @@
+{% doc %}
+  @prompt
+    Create an icon grid section with customizable icons and text labels. Each icon card should have a hover effect with smooth transitions. The section should allow merchants to add multiple icon items, where each item includes an icon image upload field, a heading field for the label text, and optional description text. Add hover effects like scale transform, shadow elevation, or color overlay. Include settings to control the number of columns (2-4 columns), icon size, spacing, background colors, and hover animation style. Make it responsive for mobile devices with automatic column stacking.
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-icon-grid-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: {{ block.settings.section_background }};
+  }
+
+  .ai-icon-grid__container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ai-icon-grid__header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .ai-icon-grid__title-{{ ai_gen_id }} {
+    font-size: 32px;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+
+  .ai-icon-grid__subtitle-{{ ai_gen_id }} {
+    font-size: 16px;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+  }
+
+  .ai-icon-grid__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+  }
+
+  .ai-icon-grid__item-{{ ai_gen_id }} {
+    background-color: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    padding: {{ block.settings.card_padding }}px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid {{ block.settings.card_border_color }};
+  }
+
+  {% if block.settings.hover_effect == 'scale' %}
+    .ai-icon-grid__item-{{ ai_gen_id }}:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+  {% elsif block.settings.hover_effect == 'lift' %}
+    .ai-icon-grid__item-{{ ai_gen_id }}:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    }
+  {% elsif block.settings.hover_effect == 'shadow' %}
+    .ai-icon-grid__item-{{ ai_gen_id }}:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+  {% elsif block.settings.hover_effect == 'overlay' %}
+    .ai-icon-grid__item-{{ ai_gen_id }} {
+      position: relative;
+      overflow: hidden;
+    }
+    .ai-icon-grid__item-{{ ai_gen_id }}::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: {{ block.settings.hover_overlay_color }};
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .ai-icon-grid__item-{{ ai_gen_id }}:hover::before {
+      opacity: {{ block.settings.hover_overlay_opacity | divided_by: 100.0 }};
+    }
+    .ai-icon-grid__item-{{ ai_gen_id }} > * {
+      position: relative;
+      z-index: 2;
+    }
+  {% endif %}
+
+  .ai-icon-grid__icon-wrapper-{{ ai_gen_id }} {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ai-icon-grid__icon-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    object-fit: contain;
+  }
+
+  .ai-icon-grid__icon-placeholder-{{ ai_gen_id }} {
+    width: {{ block.settings.icon_size }}px;
+    height: {{ block.settings.icon_size }}px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-icon-grid__icon-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-icon-grid__heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.item_heading_size }}px;
+    color: {{ block.settings.item_heading_color }};
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+
+  .ai-icon-grid__description-{{ ai_gen_id }} {
+    font-size: {{ block.settings.item_text_size }}px;
+    color: {{ block.settings.item_text_color }};
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-icon-grid-{{ ai_gen_id }} {
+      width: 100%;
+    }
+
+    .ai-icon-grid__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+      gap: {{ block.settings.grid_gap | times: 0.75 }}px;
+    }
+
+    .ai-icon-grid__title-{{ ai_gen_id }} {
+      font-size: 24px;
+    }
+
+    .ai-icon-grid__icon-{{ ai_gen_id }},
+    .ai-icon-grid__icon-placeholder-{{ ai_gen_id }} {
+      width: {{ block.settings.icon_size | times: 0.8 }}px;
+      height: {{ block.settings.icon_size | times: 0.8 }}px;
+    }
+
+    .ai-icon-grid__item-{{ ai_gen_id }} {
+      padding: {{ block.settings.card_padding | times: 0.75 }}px;
+    }
+  }
+{% endstyle %}
+
+<icon-grid-{{ ai_gen_id }} class="ai-icon-grid-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-icon-grid__container-{{ ai_gen_id }}">
+    {% if block.settings.section_title != blank or block.settings.section_subtitle != blank %}
+      <div class="ai-icon-grid__header-{{ ai_gen_id }}">
+        {% if block.settings.section_title != blank %}
+          <h2 class="ai-icon-grid__title-{{ ai_gen_id }}">{{ block.settings.section_title }}</h2>
+        {% endif %}
+        {% if block.settings.section_subtitle != blank %}
+          <p class="ai-icon-grid__subtitle-{{ ai_gen_id }}">{{ block.settings.section_subtitle }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="ai-icon-grid__grid-{{ ai_gen_id }}">
+      {% if block.settings.icon_1 != blank or block.settings.heading_1 != blank or block.settings.description_1 != blank %}
+        <div class="ai-icon-grid__item-{{ ai_gen_id }}">
+          <div class="ai-icon-grid__icon-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.icon_1 != blank %}
+              <img
+                src="{{ block.settings.icon_1 | image_url: width: 400 }}"
+                alt="{{ block.settings.icon_1.alt | default: block.settings.heading_1 | escape }}"
+                class="ai-icon-grid__icon-{{ ai_gen_id }}"
+                loading="lazy"
+                width="{{ block.settings.icon_1.width }}"
+                height="{{ block.settings.icon_1.height }}"
+              >
+            {% else %}
+              <div class="ai-icon-grid__icon-placeholder-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if block.settings.heading_1 != blank %}
+            <h3 class="ai-icon-grid__heading-{{ ai_gen_id }}">{{ block.settings.heading_1 }}</h3>
+          {% endif %}
+
+          {% if block.settings.description_1 != blank %}
+            <div class="ai-icon-grid__description-{{ ai_gen_id }}">{{ block.settings.description_1 }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.icon_2 != blank or block.settings.heading_2 != blank or block.settings.description_2 != blank %}
+        <div class="ai-icon-grid__item-{{ ai_gen_id }}">
+          <div class="ai-icon-grid__icon-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.icon_2 != blank %}
+              <img
+                src="{{ block.settings.icon_2 | image_url: width: 400 }}"
+                alt="{{ block.settings.icon_2.alt | default: block.settings.heading_2 | escape }}"
+                class="ai-icon-grid__icon-{{ ai_gen_id }}"
+                loading="lazy"
+                width="{{ block.settings.icon_2.width }}"
+                height="{{ block.settings.icon_2.height }}"
+              >
+            {% else %}
+              <div class="ai-icon-grid__icon-placeholder-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if block.settings.heading_2 != blank %}
+            <h3 class="ai-icon-grid__heading-{{ ai_gen_id }}">{{ block.settings.heading_2 }}</h3>
+          {% endif %}
+
+          {% if block.settings.description_2 != blank %}
+            <div class="ai-icon-grid__description-{{ ai_gen_id }}">{{ block.settings.description_2 }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.icon_3 != blank or block.settings.heading_3 != blank or block.settings.description_3 != blank %}
+        <div class="ai-icon-grid__item-{{ ai_gen_id }}">
+          <div class="ai-icon-grid__icon-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.icon_3 != blank %}
+              <img
+                src="{{ block.settings.icon_3 | image_url: width: 400 }}"
+                alt="{{ block.settings.icon_3.alt | default: block.settings.heading_3 | escape }}"
+                class="ai-icon-grid__icon-{{ ai_gen_id }}"
+                loading="lazy"
+                width="{{ block.settings.icon_3.width }}"
+                height="{{ block.settings.icon_3.height }}"
+              >
+            {% else %}
+              <div class="ai-icon-grid__icon-placeholder-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if block.settings.heading_3 != blank %}
+            <h3 class="ai-icon-grid__heading-{{ ai_gen_id }}">{{ block.settings.heading_3 }}</h3>
+          {% endif %}
+
+          {% if block.settings.description_3 != blank %}
+            <div class="ai-icon-grid__description-{{ ai_gen_id }}">{{ block.settings.description_3 }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.icon_4 != blank or block.settings.heading_4 != blank or block.settings.description_4 != blank %}
+        <div class="ai-icon-grid__item-{{ ai_gen_id }}">
+          <div class="ai-icon-grid__icon-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.icon_4 != blank %}
+              <img
+                src="{{ block.settings.icon_4 | image_url: width: 400 }}"
+                alt="{{ block.settings.icon_4.alt | default: block.settings.heading_4 | escape }}"
+                class="ai-icon-grid__icon-{{ ai_gen_id }}"
+                loading="lazy"
+                width="{{ block.settings.icon_4.width }}"
+                height="{{ block.settings.icon_4.height }}"
+              >
+            {% else %}
+              <div class="ai-icon-grid__icon-placeholder-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if block.settings.heading_4 != blank %}
+            <h3 class="ai-icon-grid__heading-{{ ai_gen_id }}">{{ block.settings.heading_4 }}</h3>
+          {% endif %}
+
+          {% if block.settings.description_4 != blank %}
+            <div class="ai-icon-grid__description-{{ ai_gen_id }}">{{ block.settings.description_4 }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.icon_5 != blank or block.settings.heading_5 != blank or block.settings.description_5 != blank %}
+        <div class="ai-icon-grid__item-{{ ai_gen_id }}">
+          <div class="ai-icon-grid__icon-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.icon_5 != blank %}
+              <img
+                src="{{ block.settings.icon_5 | image_url: width: 400 }}"
+                alt="{{ block.settings.icon_5.alt | default: block.settings.heading_5 | escape }}"
+                class="ai-icon-grid__icon-{{ ai_gen_id }}"
+                loading="lazy"
+                width="{{ block.settings.icon_5.width }}"
+                height="{{ block.settings.icon_5.height }}"
+              >
+            {% else %}
+              <div class="ai-icon-grid__icon-placeholder-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if block.settings.heading_5 != blank %}
+            <h3 class="ai-icon-grid__heading-{{ ai_gen_id }}">{{ block.settings.heading_5 }}</h3>
+          {% endif %}
+
+          {% if block.settings.description_5 != blank %}
+            <div class="ai-icon-grid__description-{{ ai_gen_id }}">{{ block.settings.description_5 }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.icon_6 != blank or block.settings.heading_6 != blank or block.settings.description_6 != blank %}
+        <div class="ai-icon-grid__item-{{ ai_gen_id }}">
+          <div class="ai-icon-grid__icon-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.icon_6 != blank %}
+              <img
+                src="{{ block.settings.icon_6 | image_url: width: 400 }}"
+                alt="{{ block.settings.icon_6.alt | default: block.settings.heading_6 | escape }}"
+                class="ai-icon-grid__icon-{{ ai_gen_id }}"
+                loading="lazy"
+                width="{{ block.settings.icon_6.width }}"
+                height="{{ block.settings.icon_6.height }}"
+              >
+            {% else %}
+              <div class="ai-icon-grid__icon-placeholder-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if block.settings.heading_6 != blank %}
+            <h3 class="ai-icon-grid__heading-{{ ai_gen_id }}">{{ block.settings.heading_6 }}</h3>
+          {% endif %}
+
+          {% if block.settings.description_6 != blank %}
+            <div class="ai-icon-grid__description-{{ ai_gen_id }}">{{ block.settings.description_6 }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.icon_7 != blank or block.settings.heading_7 != blank or block.settings.description_7 != blank %}
+        <div class="ai-icon-grid__item-{{ ai_gen_id }}">
+          <div class="ai-icon-grid__icon-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.icon_7 != blank %}
+              <img
+                src="{{ block.settings.icon_7 | image_url: width: 400 }}"
+                alt="{{ block.settings.icon_7.alt | default: block.settings.heading_7 | escape }}"
+                class="ai-icon-grid__icon-{{ ai_gen_id }}"
+                loading="lazy"
+                width="{{ block.settings.icon_7.width }}"
+                height="{{ block.settings.icon_7.height }}"
+              >
+            {% else %}
+              <div class="ai-icon-grid__icon-placeholder-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if block.settings.heading_7 != blank %}
+            <h3 class="ai-icon-grid__heading-{{ ai_gen_id }}">{{ block.settings.heading_7 }}</h3>
+          {% endif %}
+
+          {% if block.settings.description_7 != blank %}
+            <div class="ai-icon-grid__description-{{ ai_gen_id }}">{{ block.settings.description_7 }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if block.settings.icon_8 != blank or block.settings.heading_8 != blank or block.settings.description_8 != blank %}
+        <div class="ai-icon-grid__item-{{ ai_gen_id }}">
+          <div class="ai-icon-grid__icon-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.icon_8 != blank %}
+              <img
+                src="{{ block.settings.icon_8 | image_url: width: 400 }}"
+                alt="{{ block.settings.icon_8.alt | default: block.settings.heading_8 | escape }}"
+                class="ai-icon-grid__icon-{{ ai_gen_id }}"
+                loading="lazy"
+                width="{{ block.settings.icon_8.width }}"
+                height="{{ block.settings.icon_8.height }}"
+              >
+            {% else %}
+              <div class="ai-icon-grid__icon-placeholder-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          {% if block.settings.heading_8 != blank %}
+            <h3 class="ai-icon-grid__heading-{{ ai_gen_id }}">{{ block.settings.heading_8 }}</h3>
+          {% endif %}
+
+          {% if block.settings.description_8 != blank %}
+            <div class="ai-icon-grid__description-{{ ai_gen_id }}">{{ block.settings.description_8 }}</div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</icon-grid-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class IconGrid{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.items = this.querySelectorAll('.ai-icon-grid__item-{{ ai_gen_id }}');
+      }
+    }
+
+    customElements.define('icon-grid-{{ ai_gen_id }}', IconGrid{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Icon grid",
+  "tag": null,
+  "class": "icon-grid-block",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Title",
+      "default": "Why choose us"
+    },
+    {
+      "type": "textarea",
+      "id": "section_subtitle",
+      "label": "Subtitle",
+      "default": "Discover the benefits that set us apart"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid spacing",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Icon style"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Card padding",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border",
+      "default": "#e1e3e4"
+    },
+    {
+      "type": "header",
+      "content": "Hover effects"
+    },
+    {
+      "type": "select",
+      "id": "hover_effect",
+      "label": "Hover effect",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "scale",
+          "label": "Scale"
+        },
+        {
+          "value": "lift",
+          "label": "Lift"
+        },
+        {
+          "value": "shadow",
+          "label": "Shadow"
+        },
+        {
+          "value": "overlay",
+          "label": "Color overlay"
+        }
+      ],
+      "default": "lift"
+    },
+    {
+      "type": "color",
+      "id": "hover_overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "hover_overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "%",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Section background",
+      "default": "#f3f5f6"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Section heading",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Section text",
+      "default": "#677279"
+    },
+    {
+      "type": "color",
+      "id": "item_heading_color",
+      "label": "Item heading",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "item_text_color",
+      "label": "Item text",
+      "default": "#677279"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "item_heading_size",
+      "label": "Item heading size",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "item_text_size",
+      "label": "Item text size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Icon item 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_1",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "heading_1",
+      "label": "Heading",
+      "default": "Free shipping"
+    },
+    {
+      "type": "textarea",
+      "id": "description_1",
+      "label": "Description",
+      "default": "On orders over $50"
+    },
+    {
+      "type": "header",
+      "content": "Icon item 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_2",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "heading_2",
+      "label": "Heading",
+      "default": "24/7 support"
+    },
+    {
+      "type": "textarea",
+      "id": "description_2",
+      "label": "Description",
+      "default": "Always here to help"
+    },
+    {
+      "type": "header",
+      "content": "Icon item 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_3",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "heading_3",
+      "label": "Heading",
+      "default": "Secure payment"
+    },
+    {
+      "type": "textarea",
+      "id": "description_3",
+      "label": "Description",
+      "default": "100% protected checkout"
+    },
+    {
+      "type": "header",
+      "content": "Icon item 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_4",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "heading_4",
+      "label": "Heading",
+      "default": "Easy returns"
+    },
+    {
+      "type": "textarea",
+      "id": "description_4",
+      "label": "Description",
+      "default": "30-day return policy"
+    },
+    {
+      "type": "header",
+      "content": "Icon item 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_5",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "heading_5",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "description_5",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Icon item 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_6",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "heading_6",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "description_6",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Icon item 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_7",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "heading_7",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "description_7",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Icon item 8"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_8",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "heading_8",
+      "label": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "description_8",
+      "label": "Description"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon grid"
+    }
+  ]
+}
+{% endschema %}

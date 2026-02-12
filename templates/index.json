@@ -1,0 +1,910 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "blocks_BpeNFg": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_f376074_HJecLa": {
+          "type": "ai_gen_block_f376074",
+          "settings": {
+            "slider_width_desktop": 70,
+            "slider_width_tablet": 80,
+            "gap": 25,
+            "border_radius": 8,
+            "slider_image_1": "shopify://shop_images/wingswestcivic_rgb.jpg",
+            "slider_image_2": "shopify://shop_images/wingswestRSX.jpg",
+            "slider_image_3": "shopify://shop_images/DodgeNeon_10e5f7d1-4fd7-4d2a-803f-188e47c94818.jpg",
+            "slider_image_4": "shopify://shop_images/02CivicSi.jpg",
+            "slider_height": 550,
+            "autoplay": true,
+            "autoplay_speed": 5,
+            "transition_speed": 0.5,
+            "slider_background": "rgba(0,0,0,0)",
+            "arrow_background": "#ffffff",
+            "arrow_hover_background": "#ff0000",
+            "arrow_color": "#000000",
+            "pause_on_hover": true,
+            "show_dots": false,
+            "dot_color": "#ffffff",
+            "dot_active_color": "#ffffff",
+            "dot_border_color": "#ffffff",
+            "carousel_title": "DAILY DEAL",
+            "carousel_title_size": 24,
+            "carousel_title_color": "#000000",
+            "product_collection": "front-lip",
+            "carousel_background": "#ffffff",
+            "carousel_autoplay": false,
+            "carousel_autoplay_speed": 5,
+            "desktop_products_visible": 1,
+            "tablet_products_visible": 1,
+            "card_background": "#ffffff",
+            "card_border_radius": 8,
+            "product_title_size": 16,
+            "product_title_color": "#000000",
+            "product_price_size": 18,
+            "product_price_color": "#f30000",
+            "icon_background": "#ffffff",
+            "icon_hover_background": "#f0f0f0",
+            "icon_color": "#000000",
+            "cart_button_label": "ADD TO CART",
+            "cart_button_size": 14,
+            "cart_button_background": "#da1b2e",
+            "cart_button_hover": "#f30000",
+            "cart_button_text_color": "#ffffff",
+            "cart_button_radius": 6,
+            "carousel_arrow_background": "#bbbbbb",
+            "carousel_arrow_hover": "#ff0000",
+            "carousel_arrow_color": "#000000"
+          },
+          "blocks": {}
+        },
+        "autofit_ai_year_make_model_autofit_ai_fitment_widget_wY8rDM": {
+          "type": "shopify://apps/autofit-ai-year-make-model/blocks/autofit-ai-fitment-widget/f3f32339-375b-40b5-9f9a-53fa2c05bb6a",
+          "disabled": true,
+          "settings": {
+            "auto_open": false,
+            "page_width": 1400,
+            "padding_top": 36,
+            "padding_bottom": 36,
+            "padding_left": 0,
+            "padding_right": 0
+          }
+        }
+      },
+      "block_order": [
+        "ai_gen_block_f376074_HJecLa",
+        "autofit_ai_year_make_model_autofit_ai_fitment_widget_wY8rDM"
+      ],
+      "custom_css": [
+        "section {margin-top: 20px;}"
+      ],
+      "name": "Split screen slider",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "slideshow": {
+      "type": "slideshow",
+      "blocks": {
+        "image-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/wingswestRSX.jpg",
+            "show_overlay": true,
+            "overlay_opacity": 30,
+            "text_color": "#ffffff",
+            "title": "",
+            "content": "",
+            "content_position": "middle_center",
+            "button_background": "#00badb",
+            "button_text_color": "#ffffff",
+            "button_text": "",
+            "link": "shopify://collections/all"
+          }
+        },
+        "image-2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/wingswestcivic_rgb.jpg",
+            "show_overlay": false,
+            "overlay_opacity": 30,
+            "text_color": "#ffffff",
+            "title": "",
+            "content": "",
+            "content_position": "middle_right",
+            "button_background": "#00badb",
+            "button_text_color": "#ffffff",
+            "button_text": "",
+            "link": "shopify://collections/all"
+          }
+        },
+        "image-3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/DodgeNeon.jpg",
+            "show_overlay": false,
+            "overlay_opacity": 30,
+            "text_color": "#ffffff",
+            "title": "",
+            "content": "",
+            "content_position": "middle_left",
+            "button_background": "#00badb",
+            "button_text_color": "#ffffff",
+            "button_text": "",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "image-1",
+        "image-2",
+        "image-3"
+      ],
+      "disabled": true,
+      "settings": {
+        "edge_to_edge": true,
+        "section_size": "preserve_ratio",
+        "carousel_effect": "slide",
+        "autoplay": true,
+        "cycle_speed": 5
+      }
+    },
+    "product_filter_aYDAjE": {
+      "type": "product-filter",
+      "blocks": {
+        "easysearch_ymm_easysearch_widget_9BW6U6": {
+          "type": "shopify://apps/easysearch-ymm/blocks/easysearch-widget/6d82686b-b68a-4b5e-98e3-e07b2b53d810",
+          "settings": {
+            "show_at": "section",
+            "placement_selector": "",
+            "insert_method": "prepend",
+            "padding_top": 0,
+            "padding_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "easysearch_ymm_easysearch_widget_9BW6U6"
+      ],
+      "name": "Product Filter",
+      "settings": {
+        "title": "SELECT YOUR VEHICLE",
+        "description": "OVER 120,000 AUTOMOTIVE AND TRUCK PARTS",
+        "heading_size": 48,
+        "description_size": 16,
+        "bg_image": "shopify://shop_images/bg-search-art.jpg"
+      }
+    },
+    "17661359068f21c67e": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_f376074_iJj8h6": {
+          "type": "ai_gen_block_f376074",
+          "disabled": true,
+          "settings": {
+            "slider_width_desktop": 70,
+            "slider_width_tablet": 50,
+            "gap": 0,
+            "border_radius": 8,
+            "slider_image_1": "shopify://shop_images/wingswestcivic_rgb.jpg",
+            "slider_image_2": "shopify://shop_images/wingswestRSX.jpg",
+            "slider_image_3": "shopify://shop_images/DodgeNeon.jpg",
+            "slider_height": 550,
+            "autoplay": true,
+            "autoplay_speed": 4,
+            "transition_speed": 0.5,
+            "slider_background": "#f3f5f6",
+            "arrow_background": "#ffffff",
+            "arrow_hover_background": "#ff0000",
+            "arrow_color": "#000000",
+            "pause_on_hover": true,
+            "show_dots": true,
+            "dot_color": "#ffffff",
+            "dot_active_color": "#ffffff",
+            "dot_border_color": "#ffffff",
+            "carousel_title": "Daily Deal",
+            "carousel_title_size": 24,
+            "carousel_title_color": "#000000",
+            "product_collection": "frontpage",
+            "carousel_background": "#f8f8f8",
+            "carousel_autoplay": true,
+            "carousel_autoplay_speed": 5,
+            "desktop_products_visible": 1,
+            "tablet_products_visible": 2,
+            "card_background": "#ffffff",
+            "card_border_radius": 8,
+            "product_title_size": 16,
+            "product_title_color": "#000000",
+            "product_price_size": 18,
+            "product_price_color": "#000000",
+            "icon_background": "#ffffff",
+            "icon_hover_background": "#f0f0f0",
+            "icon_color": "#000000",
+            "cart_button_label": "ADD TO CART",
+            "cart_button_size": 14,
+            "cart_button_background": "#ff0000",
+            "cart_button_hover": "#cc0000",
+            "cart_button_text_color": "#ffffff",
+            "cart_button_radius": 4,
+            "carousel_arrow_background": "#000000",
+            "carousel_arrow_hover": "#333333",
+            "carousel_arrow_color": "#ffffff"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_f376074_iJj8h6"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "promotion-list": {
+      "type": "promotion-list",
+      "blocks": {
+        "item-1": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "stretch_image": false,
+            "show_overlay": false,
+            "overlay_opacity": 50,
+            "background": "#fc2a68",
+            "text_color": "#ffffff",
+            "title": "OLED TVs",
+            "content": "<p>Exclusive offers on TVs until Dec 31.<br/>$100 off on every purchase</p>",
+            "content_position": "top_left",
+            "button_background": "#ffffff",
+            "button_text_color": "#fc2a68",
+            "button_text": "Learn more",
+            "button_link": ""
+          }
+        },
+        "item-2": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "stretch_image": false,
+            "show_overlay": false,
+            "overlay_opacity": 50,
+            "background": "#6f42ef",
+            "text_color": "#ffffff",
+            "title": "Speakers",
+            "content": "<p>Explore our range of high-quality speakers.</p>",
+            "content_position": "top_left",
+            "button_background": "#ffffff",
+            "button_text_color": "#6f42ef",
+            "button_text": "Learn more",
+            "button_link": ""
+          }
+        },
+        "item-3": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "stretch_image": false,
+            "show_overlay": false,
+            "overlay_opacity": 50,
+            "background": "#26c1ce",
+            "text_color": "#ffffff",
+            "title": "Headphones",
+            "content": "<p>Discover our new headphones.<br/>Up to 25% Off !</p>",
+            "content_position": "top_left",
+            "button_background": "#ffffff",
+            "button_text_color": "#26c1ce",
+            "button_text": "Learn more",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "item-1",
+        "item-2",
+        "item-3"
+      ],
+      "disabled": true,
+      "name": "Promotion blocks",
+      "settings": {
+        "expand_items": false,
+        "section_size": "medium",
+        "stack_mobile": false
+      }
+    },
+    "17661265817c01b9e9": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_cdc29d2_cncTiz": {
+          "type": "ai_gen_block_cdc29d2",
+          "settings": {
+            "subtitle": "TOP POPULAR ON THIS WEEK",
+            "title": "FEATURED PRODUCTS",
+            "products_per_tab": 8,
+            "tab_1_enabled": true,
+            "tab_1_label": "HOOD",
+            "tab_1_collection": "front-lip",
+            "tab_2_enabled": true,
+            "tab_2_label": "FRONT BUMPER",
+            "tab_2_collection": "front-bumper",
+            "tab_3_enabled": true,
+            "tab_3_label": "REAR BUMPER",
+            "tab_3_collection": "rear-bumper",
+            "tab_4_enabled": true,
+            "tab_4_label": "SIDE SKIRTS",
+            "tab_4_collection": "side-skirts",
+            "tab_5_enabled": true,
+            "tab_5_label": "ACCESSORIES",
+            "tab_5_collection": "spoiler",
+            "tab_6_enabled": false,
+            "tab_6_label": "NEW TAB",
+            "tab_6_collection": "",
+            "tab_7_enabled": false,
+            "tab_7_label": "NEW TAB",
+            "tab_7_collection": "",
+            "tab_8_enabled": false,
+            "tab_8_label": "NEW TAB",
+            "tab_8_collection": "",
+            "tab_9_enabled": false,
+            "tab_9_label": "NEW TAB",
+            "tab_9_collection": "",
+            "tab_10_enabled": false,
+            "tab_10_label": "NEW TAB",
+            "tab_10_collection": "",
+            "max_width": 1200,
+            "section_padding_top": 0,
+            "section_padding_bottom": 0,
+            "header_spacing": 20,
+            "tabs_margin_bottom": 50,
+            "subtitle_size": 14,
+            "subtitle_weight": 400,
+            "subtitle_letter_spacing": 1,
+            "subtitle_margin": 5,
+            "subtitle_color": "#f34736",
+            "title_size": 36,
+            "title_weight": 700,
+            "title_letter_spacing": 1,
+            "title_color": "#000000",
+            "tab_gap": 12,
+            "tab_padding_vertical": 8,
+            "tab_padding_horizontal": 30,
+            "tab_font_size": 14,
+            "tab_font_weight": 500,
+            "tab_border_width": 1,
+            "tab_border_radius": 28,
+            "tab_bg_color": "#ffffff",
+            "tab_text_color": "#333333",
+            "tab_border_color": "#dddddd",
+            "tab_hover_bg_color": "#ff0000",
+            "tab_hover_text_color": "#ffffff",
+            "tab_hover_border_color": "#cccccc",
+            "tab_active_bg_color": "#f34736",
+            "tab_active_text_color": "#ffffff",
+            "tab_active_border_color": "#f34736",
+            "background_color": "#ffffff",
+            "text_color": "#333333"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_cdc29d2_cncTiz"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "17661290623c47bdfd": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_2e0acd2_kikRNq": {
+          "type": "ai_gen_block_2e0acd2",
+          "settings": {
+            "subtitle": "TOP NEW ON THIS WEEK",
+            "heading": "NEW ARRIVALS",
+            "collection": "spoiler",
+            "products_to_show": 12,
+            "section_background": "#ffffff",
+            "subtitle_color": "#ff0000",
+            "heading_color": "#1c1b1b",
+            "card_background": "#ffffff",
+            "product_title_color": "#1c1b1b",
+            "product_price_color": "#000000",
+            "nav_button_background": "#ffffff",
+            "nav_button_hover_background": "#ff0000",
+            "nav_button_color": "#000000",
+            "heading_size": 36,
+            "card_spacing": 20,
+            "card_border_radius": 8,
+            "desktop_width_percent": 100
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_2e0acd2_kikRNq"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "offers": {
+      "type": "offers",
+      "blocks": {
+        "offer-1": {
+          "type": "offer",
+          "disabled": true,
+          "settings": {
+            "title": "Exclusive offers",
+            "content": "<p>Enjoy great discounts on a wide range of portable speakers, including compact clip-on models, versatile flip-style speakers, and smart voice-controlled options!</p>"
+          }
+        },
+        "offer-2": {
+          "type": "offer",
+          "settings": {
+            "title": "Free shipping for all orders",
+            "content": "<p>We got you covered ! We deliver your goods using UPS expedited shipping, free of charge</p>"
+          }
+        }
+      },
+      "block_order": [
+        "offer-1",
+        "offer-2"
+      ],
+      "disabled": true,
+      "name": "Offers",
+      "settings": {
+        "items_per_row": 2,
+        "stack_mobile": false
+      }
+    },
+    "collection-list": {
+      "type": "collection-list",
+      "blocks": {
+        "collection-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "link": ""
+          }
+        },
+        "collection-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "link": ""
+          }
+        },
+        "collection-3": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "link": ""
+          }
+        },
+        "collection-4": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "link": ""
+          }
+        },
+        "collection-5": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "link": ""
+          }
+        },
+        "collection-6": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection-1",
+        "collection-2",
+        "collection-3",
+        "collection-4",
+        "collection-5",
+        "collection-6"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "Our collections",
+        "link_title": "View all",
+        "link": "shopify://collections",
+        "round_images": true,
+        "show_collection_title": true
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "",
+        "title": "Featured collection",
+        "products_count": 12,
+        "layout": "vertical",
+        "stack_products": false,
+        "show_quick_buy": false,
+        "link_title": "View all sales",
+        "link_url": ""
+      }
+    },
+    "mosaic": {
+      "type": "mosaic",
+      "blocks": {
+        "item-1": {
+          "type": "item",
+          "settings": {
+            "show_overlay": false,
+            "overlay_opacity": 50,
+            "background": "#ff2e1f",
+            "text_color": "#ffffff",
+            "title": "Bluetooth",
+            "content": "Feel the freedom with our Bluetooth headphones and speakers.",
+            "content_position": "top_left",
+            "button_background": "#4f5558",
+            "button_text_color": "#f3f4f4",
+            "button_text": "Learn more",
+            "link": ""
+          }
+        },
+        "item-2": {
+          "type": "item",
+          "settings": {
+            "show_overlay": false,
+            "overlay_opacity": 50,
+            "background": "#383639",
+            "text_color": "#ffffff",
+            "title": "Professional audio",
+            "content": "Get the best deals for professional audio equipment.",
+            "content_position": "top_left",
+            "button_background": "#4f5558",
+            "button_text_color": "#f3f4f4",
+            "button_text": "Learn more",
+            "link": ""
+          }
+        },
+        "item-3": {
+          "type": "item",
+          "settings": {
+            "show_overlay": false,
+            "overlay_opacity": 50,
+            "background": "#f3f4f4",
+            "text_color": "#000000",
+            "title": "Headphones",
+            "content": "Our selection of premium headphones to enjoy your favorite playlist with an incredible sound.",
+            "content_position": "top_left",
+            "button_background": "#4f5558",
+            "button_text_color": "#f3f4f4",
+            "button_text": "Learn more",
+            "link": ""
+          }
+        },
+        "item-4": {
+          "type": "item",
+          "settings": {
+            "show_overlay": false,
+            "overlay_opacity": 50,
+            "background": "#f3f4f4",
+            "text_color": "#000000",
+            "title": "Accessories",
+            "content": "Our various accessories to have the best experience.",
+            "content_position": "top_left",
+            "button_background": "#4f5558",
+            "button_text_color": "#f3f4f4",
+            "button_text": "Learn more",
+            "link": ""
+          }
+        },
+        "item-5": {
+          "type": "item",
+          "settings": {
+            "show_overlay": false,
+            "overlay_opacity": 50,
+            "background": "#383639",
+            "text_color": "#ffffff",
+            "title": "Projectors",
+            "content": "Play or watch your favorites TV shows with these projectors.",
+            "content_position": "top_left",
+            "button_background": "#4f5558",
+            "button_text_color": "#f3f4f4",
+            "button_text": "Learn more",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "item-1",
+        "item-2",
+        "item-3",
+        "item-4",
+        "item-5"
+      ],
+      "disabled": true,
+      "name": "Mosaic",
+      "settings": {
+        "section_size": "medium"
+      }
+    },
+    "rich-text": {
+      "type": "rich-text",
+      "disabled": true,
+      "name": "Rich text",
+      "settings": {
+        "text_width": "narrow",
+        "title": "About us",
+        "content": "<p>Our mission is to deliver an exceptional customer experience in the audio and video industry, without compromise. We are committed to offering only top-performing products, mastering their features inside and out to ensure that your experience with both our team and the products we provide is unmatched. As one of the fastest-growing retailers in this space, we take pride in setting a high standard for quality and service.</p>",
+        "button_text": "Our products",
+        "button_link": "shopify://collections/all"
+      }
+    },
+    "logo-list": {
+      "type": "logo-list",
+      "blocks": {
+        "logo-1": {
+          "type": "logo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "logo-2": {
+          "type": "logo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "logo-3": {
+          "type": "logo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "logo-4": {
+          "type": "logo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "logo-5": {
+          "type": "logo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "logo-6": {
+          "type": "logo",
+          "settings": {
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo-1",
+        "logo-2",
+        "logo-3",
+        "logo-4",
+        "logo-5",
+        "logo-6"
+      ],
+      "disabled": true,
+      "name": "Logo list",
+      "settings": {
+        "title": "Brands we distribute",
+        "link_title": "",
+        "link": ""
+      }
+    },
+    "collection-with-image": {
+      "type": "collection-with-image",
+      "disabled": true,
+      "name": "Collection with image",
+      "settings": {
+        "collection": "",
+        "products_count": 12,
+        "show_quick_buy": false,
+        "background": "#2d2d2d",
+        "text_color": "#ffffff",
+        "title": "New TVs",
+        "content": "Here is our selection of new TVs on the market, picked by our experts.",
+        "button_background": "#ffffff",
+        "button_text_color": "#2d2d2d",
+        "button_text": "Learn more",
+        "button_link": ""
+      }
+    },
+    "featured-product": {
+      "type": "featured-product",
+      "blocks": {
+        "product-meta-1": {
+          "type": "product_meta",
+          "settings": {
+            "show_vendor": true,
+            "show_sku": false,
+            "show_reviews_badge": false,
+            "show_share_buttons": true
+          }
+        },
+        "featured-description-1": {
+          "type": "featured_description",
+          "settings": {}
+        },
+        "variant-selector-1": {
+          "type": "variant_selector",
+          "settings": {
+            "selector_mode": "block",
+            "color_mode": "swatch",
+            "variant_image_options": "",
+            "show_quantity_selector": true,
+            "show_taxes_included": false,
+            "show_inventory_quantity": false,
+            "low_inventory_threshold": 0,
+            "progress_bar_max_value": 50
+          }
+        },
+        "buy-buttons-1": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": true,
+            "show_gift_card_recipient": true
+          }
+        }
+      },
+      "block_order": [
+        "product-meta-1",
+        "featured-description-1",
+        "variant-selector-1",
+        "buy-buttons-1"
+      ],
+      "disabled": true,
+      "settings": {
+        "product": "",
+        "title": "Featured product",
+        "link_title": "View details",
+        "link_url": "",
+        "image_size": "small",
+        "enable_image_zoom": true,
+        "enable_video_looping": false,
+        "zoom_effect": "outside",
+        "carousel_effect": "fade"
+      }
+    },
+    "featured-collection-1": {
+      "type": "featured-collection",
+      "disabled": true,
+      "name": "Featured collection",
+      "settings": {
+        "collection": "",
+        "title": "Top-rated products",
+        "products_count": 12,
+        "layout": "collage",
+        "stack_products": false,
+        "show_quick_buy": false,
+        "link_title": "View all",
+        "link_url": ""
+      }
+    },
+    "blog-posts": {
+      "type": "blog-posts",
+      "disabled": true,
+      "settings": {
+        "blog": "",
+        "blog_posts_count": 3,
+        "title": "Blog posts",
+        "link_title": "View all",
+        "show_category": true,
+        "show_author": true,
+        "show_date": true,
+        "show_excerpt": false,
+        "stack_mobile": false
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "disabled": true,
+      "settings": {
+        "title": "Let's keep in touch",
+        "content": "<p>Subscribe to our weekly newsletter and receive exclusive offers on products you love!</p>",
+        "background": "rgba(0,0,0,0)",
+        "text": "#677279"
+      }
+    },
+    "quick-links": {
+      "type": "quick-links",
+      "blocks": {
+        "link-1": {
+          "type": "link",
+          "settings": {
+            "title": "Headphones",
+            "link": ""
+          }
+        },
+        "link-2": {
+          "type": "link",
+          "settings": {
+            "title": "Speakers",
+            "link": ""
+          }
+        },
+        "link-3": {
+          "type": "link",
+          "settings": {
+            "title": "TVs",
+            "link": ""
+          }
+        },
+        "link-4": {
+          "type": "link",
+          "settings": {
+            "title": "Turntables",
+            "link": ""
+          }
+        },
+        "link-5": {
+          "type": "link",
+          "settings": {
+            "title": "Subwoofers",
+            "link": ""
+          }
+        },
+        "link-6": {
+          "type": "link",
+          "settings": {
+            "title": "Projectors",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "link-1",
+        "link-2",
+        "link-3",
+        "link-4",
+        "link-5",
+        "link-6"
+      ],
+      "disabled": true,
+      "name": "Quick links",
+      "settings": {
+        "title": "Quick links",
+        "expand_items": true,
+        "show_desktop": true,
+        "link_title": "",
+        "link": ""
+      }
+    }
+  },
+  "order": [
+    "blocks_BpeNFg",
+    "slideshow",
+    "product_filter_aYDAjE",
+    "17661359068f21c67e",
+    "promotion-list",
+    "17661265817c01b9e9",
+    "17661290623c47bdfd",
+    "offers",
+    "collection-list",
+    "featured-collection",
+    "mosaic",
+    "rich-text",
+    "logo-list",
+    "collection-with-image",
+    "featured-product",
+    "featured-collection-1",
+    "blog-posts",
+    "newsletter",
+    "quick-links"
+  ]
+}

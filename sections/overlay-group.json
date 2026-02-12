@@ -1,0 +1,51 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "custom.overlay",
+  "name": "Overlay group",
+  "sections": {
+    "popups": {
+      "type": "popups",
+      "blocks": {
+        "newsletter_6TfeBn": {
+          "type": "newsletter",
+          "settings": {
+            "show_only_on_index": true,
+            "show_only_for_visitors": true,
+            "show_only_once": true,
+            "title": "Newsletter Subscribe",
+            "content": "<p>Subscribe to the mailing list to receive updates on new arrivals, special offers and other discount information.</p>",
+            "show_newsletter": true,
+            "image_url": "https://wingswest.com/static/frontend/Sm/autostore_child/en_US/images/bg-newsletter.jpg",
+            "show_checkbox": false,
+            "checkbox_text": "Don't show this popup again",
+            "show_social": true,
+            "apparition_delay": 0
+          }
+        }
+      },
+      "block_order": [
+        "newsletter_6TfeBn"
+      ],
+      "settings": {}
+    },
+    "privacy-banner": {
+      "type": "privacy-banner",
+      "disabled": true,
+      "settings": {
+        "text": "<p>Use this bar to show information about your cookie policy.</p>"
+      }
+    }
+  },
+  "order": [
+    "popups",
+    "privacy-banner"
+  ]
+}

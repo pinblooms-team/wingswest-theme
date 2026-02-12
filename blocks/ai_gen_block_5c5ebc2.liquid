@@ -1,0 +1,803 @@
+{% doc %}
+  @prompt
+    Create a split-screen section with two components side by side. On the left (80% width on desktop), add a large image slider with left and right navigation arrows to showcase hero banner images. On the right (20% width on desktop), create a 'DAILY DEAL' product carousel that displays one product at a time with product image, title, price, an 'ADD TO CART' button, and navigation arrows to browse through deals. Both the slider and carousel should work independently. Make it fully responsive so the layout adjusts proportions automatically on smaller screens - on mobile, stack them vertically with the slider on top. Include smooth transitions and modern styling with proper spacing
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-split-screen-{{ ai_gen_id }} {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .ai-split-screen-container-{{ ai_gen_id }} {
+    display: flex;
+    gap: 0;
+    width: 100%;
+    background-color: {{ block.settings.background_color }};
+  }
+
+  .ai-split-screen-slider-section-{{ ai_gen_id }} {
+    flex: 0 0 80%;
+    position: relative;
+    overflow: hidden;
+  }
+  .ai-split-screen-slider-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    height: {{ block.settings.slider_height }}px;
+  }
+
+  .ai-split-screen-slider-track-{{ ai_gen_id }} {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .ai-split-screen-slide-{{ ai_gen_id }} {
+    flex: 0 0 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .ai-split-screen-slide-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-split-screen-slide-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-split-screen-slide-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  .ai-split-screen-slider-nav-{{ ai_gen_id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: {{ block.settings.nav_button_bg }};
+    color: {{ block.settings.nav_button_color }};
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: all 0.3s ease;
+    opacity: 0.9;
+  }
+
+  .ai-split-screen-slider-nav-{{ ai_gen_id }}:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .ai-split-screen-slider-nav-{{ ai_gen_id }}:focus {
+    outline: 2px solid {{ block.settings.nav_button_color }};
+    outline-offset: 2px;
+  }
+
+  .ai-split-screen-slider-nav-prev-{{ ai_gen_id }} {
+    left: 20px;
+  }
+
+  .ai-split-screen-slider-nav-next-{{ ai_gen_id }} {
+    right: 20px;
+  }
+
+  .ai-split-screen-slider-nav-{{ ai_gen_id }} svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .ai-split-screen-deals-section-{{ ai_gen_id }} {
+    flex: 0 0 20%;
+    background-color: {{ block.settings.deals_bg_color }};
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+  }
+
+  .ai-split-screen-deals-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .ai-split-screen-deals-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.deals_title_size }}px;
+    font-weight: 700;
+    color: {{ block.settings.deals_title_color }};
+    margin: 0 0 10px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .ai-split-screen-deals-subtitle-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.deals_text_color }};
+    margin: 0;
+  }
+
+  .ai-split-screen-deals-carousel-{{ ai_gen_id }} {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ai-split-screen-deals-track-{{ ai_gen_id }} {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    flex: 1;
+  }
+
+  .ai-split-screen-deal-item-{{ ai_gen_id }} {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .ai-split-screen-deal-image-{{ ai_gen_id }} {
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #f4f4f4;
+  }
+
+  .ai-split-screen-deal-image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-split-screen-deal-image-{{ ai_gen_id }}:hover img {
+    transform: scale(1.05);
+  }
+
+  .ai-split-screen-deal-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+  }
+
+  .ai-split-screen-deal-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+  }
+
+  .ai-split-screen-deal-info-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .ai-split-screen-deal-title-{{ ai_gen_id }} {
+    font-size: 16px;
+    font-weight: 600;
+    color: {{ block.settings.deals_text_color }};
+    margin: 0;
+    line-height: 1.3;
+    min-height: 40px;
+  }
+
+  .ai-split-screen-deal-price-{{ ai_gen_id }} {
+    font-size: 20px;
+    font-weight: 700;
+    color: {{ block.settings.deals_price_color }};
+    margin: 0;
+  }
+
+  .ai-split-screen-deal-compare-price-{{ ai_gen_id }} {
+    font-size: 16px;
+    color: {{ block.settings.deals_text_color }};
+    text-decoration: line-through;
+    opacity: 0.6;
+    margin-left: 8px;
+  }
+
+  .ai-split-screen-deal-button-{{ ai_gen_id }} {
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+
+  .ai-split-screen-deal-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg }};
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .ai-split-screen-deal-button-{{ ai_gen_id }}:focus {
+    outline: 2px solid {{ block.settings.button_bg_color }};
+    outline-offset: 2px;
+  }
+
+  .ai-split-screen-deals-nav-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .ai-split-screen-deals-nav-btn-{{ ai_gen_id }} {
+    background-color: {{ block.settings.nav_button_bg }};
+    color: {{ block.settings.nav_button_color }};
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .ai-split-screen-deals-nav-btn-{{ ai_gen_id }}:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+
+  .ai-split-screen-deals-nav-btn-{{ ai_gen_id }}:focus {
+    outline: 2px solid {{ block.settings.nav_button_color }};
+    outline-offset: 2px;
+  }
+
+  .ai-split-screen-deals-nav-btn-{{ ai_gen_id }} svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .ai-split-screen-empty-state-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 40px 20px;
+    color: {{ block.settings.deals_text_color }};
+    opacity: 0.6;
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-split-screen-container-{{ ai_gen_id }} {
+      flex-direction: column;
+    }
+
+    .ai-split-screen-slider-section-{{ ai_gen_id }} {
+      flex: 0 0 100%;
+    }
+
+    .ai-split-screen-slider-wrapper-{{ ai_gen_id }} {
+      height: {{ block.settings.slider_height_mobile }}px;
+    }
+
+    .ai-split-screen-deals-section-{{ ai_gen_id }} {
+      flex: 0 0 100%;
+      padding: 40px 20px;
+    }
+
+    .ai-split-screen-deals-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.deals_title_size | times: 0.9 }}px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-split-screen-slider-nav-{{ ai_gen_id }} {
+      width: 40px;
+      height: 40px;
+    }
+
+    .ai-split-screen-slider-nav-prev-{{ ai_gen_id }} {
+      left: 10px;
+    }
+
+    .ai-split-screen-slider-nav-next-{{ ai_gen_id }} {
+      right: 10px;
+    }
+
+    .ai-split-screen-slider-nav-{{ ai_gen_id }} svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+{% endstyle %}
+
+<split-screen-section-{{ ai_gen_id }} class="ai-split-screen-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-split-screen-container-{{ ai_gen_id }}">
+    <div class="ai-split-screen-slider-section-{{ ai_gen_id }}">
+      <div class="ai-split-screen-slider-wrapper-{{ ai_gen_id }}">
+        <div class="ai-split-screen-slider-track-{{ ai_gen_id }}" data-slider-track>
+          {% for i in (1..5) %}
+            {% assign image_key = 'slider_image_' | append: i %}
+            {% assign image = block.settings[image_key] %}
+            
+            <div class="ai-split-screen-slide-{{ ai_gen_id }}">
+              {% if image %}
+                <img
+                  src="{{ image | image_url: width: 2000 }}"
+                  alt="{{ image.alt | escape }}"
+                  loading="lazy"
+                  width="{{ image.width }}"
+                  height="{{ image.height }}"
+                >
+              {% else %}
+                <div class="ai-split-screen-slide-placeholder-{{ ai_gen_id }}">
+                  {{ 'hero-apparel-1' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+
+        <button
+          class="ai-split-screen-slider-nav-{{ ai_gen_id }} ai-split-screen-slider-nav-prev-{{ ai_gen_id }}"
+          data-slider-prev
+          aria-label="Previous slide"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <button
+          class="ai-split-screen-slider-nav-{{ ai_gen_id }} ai-split-screen-slider-nav-next-{{ ai_gen_id }}"
+          data-slider-next
+          aria-label="Next slide"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="ai-split-screen-deals-section-{{ ai_gen_id }}">
+      <div class="ai-split-screen-deals-header-{{ ai_gen_id }}">
+        <h2 class="ai-split-screen-deals-title-{{ ai_gen_id }}">{{ block.settings.deals_title }}</h2>
+        {% if block.settings.deals_subtitle != blank %}
+          <p class="ai-split-screen-deals-subtitle-{{ ai_gen_id }}">{{ block.settings.deals_subtitle }}</p>
+        {% endif %}
+      </div>
+
+      {% assign has_products = false %}
+      {% for i in (1..5) %}
+        {% assign product_key = 'deal_product_' | append: i %}
+        {% if block.settings[product_key] != blank %}
+          {% assign has_products = true %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+
+      {% if has_products %}
+        <div class="ai-split-screen-deals-carousel-{{ ai_gen_id }}">
+          <div class="ai-split-screen-deals-track-{{ ai_gen_id }}" data-deals-track>
+            {% for i in (1..5) %}
+              {% assign product_key = 'deal_product_' | append: i %}
+              {% assign product = block.settings[product_key] %}
+              
+              {% if product != blank %}
+                <div class="ai-split-screen-deal-item-{{ ai_gen_id }}">
+                  <div class="ai-split-screen-deal-image-{{ ai_gen_id }}">
+                    {% if product.featured_image %}
+                      <img
+                        src="{{ product.featured_image | image_url: width: 600 }}"
+                        alt="{{ product.featured_image.alt | escape }}"
+                        loading="lazy"
+                        width="600"
+                        height="600"
+                      >
+                    {% else %}
+                      <div class="ai-split-screen-deal-image-placeholder-{{ ai_gen_id }}">
+                        {{ 'product-1' | placeholder_svg_tag }}
+                      </div>
+                    {% endif %}
+                  </div>
+
+                  <div class="ai-split-screen-deal-info-{{ ai_gen_id }}">
+                    <h3 class="ai-split-screen-deal-title-{{ ai_gen_id }}">{{ product.title }}</h3>
+                    
+                    <div class="ai-split-screen-deal-price-{{ ai_gen_id }}">
+                      {{ product.price | money }}
+                      {% if product.compare_at_price > product.price %}
+                        <span class="ai-split-screen-deal-compare-price-{{ ai_gen_id }}">
+                          {{ product.compare_at_price | money }}
+                        </span>
+                      {% endif %}
+                    </div>
+
+                    <button
+                      class="ai-split-screen-deal-button-{{ ai_gen_id }}"
+                      data-product-id="{{ product.id }}"
+                      data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                      data-add-to-cart
+                    >
+                      {{ block.settings.button_text }}
+                    </button>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+
+          <div class="ai-split-screen-deals-nav-{{ ai_gen_id }}">
+            <button
+              class="ai-split-screen-deals-nav-btn-{{ ai_gen_id }}"
+              data-deals-prev
+              aria-label="Previous deal"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+
+            <button
+              class="ai-split-screen-deals-nav-btn-{{ ai_gen_id }}"
+              data-deals-next
+              aria-label="Next deal"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </div>
+      {% else %}
+        <div class="ai-split-screen-empty-state-{{ ai_gen_id }}">
+          <p>Add products to display daily deals</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</split-screen-section-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class SplitScreenSection{{ai_gen_id}} extends HTMLElement {
+      constructor() {
+        super();
+        this.sliderCurrentIndex = 0;
+        this.dealsCurrentIndex = 0;
+      }
+
+      connectedCallback() {
+        this.sliderTrack = this.querySelector('[data-slider-track]');
+        this.sliderPrevBtn = this.querySelector('[data-slider-prev]');
+        this.sliderNextBtn = this.querySelector('[data-slider-next]');
+        this.sliderSlides = this.sliderTrack ? this.sliderTrack.children : [];
+
+        this.dealsTrack = this.querySelector('[data-deals-track]');
+        this.dealsPrevBtn = this.querySelector('[data-deals-prev]');
+        this.dealsNextBtn = this.querySelector('[data-deals-next]');
+        this.dealsItems = this.dealsTrack ? this.dealsTrack.children : [];
+
+        this.addToCartButtons = this.querySelectorAll('[data-add-to-cart]');
+
+        this.setupSlider();
+        this.setupDealsCarousel();
+        this.setupAddToCart();
+      }
+
+      setupSlider() {
+        if (!this.sliderTrack || this.sliderSlides.length === 0) return;
+
+        this.sliderPrevBtn.addEventListener('click', () => this.navigateSlider(-1));
+        this.sliderNextBtn.addEventListener('click', () => this.navigateSlider(1));
+
+        this.updateSliderPosition();
+      }
+
+      navigateSlider(direction) {
+        this.sliderCurrentIndex += direction;
+
+        if (this.sliderCurrentIndex < 0) {
+          this.sliderCurrentIndex = this.sliderSlides.length - 1;
+        } else if (this.sliderCurrentIndex >= this.sliderSlides.length) {
+          this.sliderCurrentIndex = 0;
+        }
+
+        this.updateSliderPosition();
+      }
+
+      updateSliderPosition() {
+        const offset = -this.sliderCurrentIndex * 100;
+        this.sliderTrack.style.transform = `translateX(${offset}%)`;
+      }
+
+      setupDealsCarousel() {
+        if (!this.dealsTrack || this.dealsItems.length === 0) return;
+
+        this.dealsPrevBtn.addEventListener('click', () => this.navigateDeals(-1));
+        this.dealsNextBtn.addEventListener('click', () => this.navigateDeals(1));
+
+        this.updateDealsPosition();
+      }
+
+      navigateDeals(direction) {
+        this.dealsCurrentIndex += direction;
+
+        if (this.dealsCurrentIndex < 0) {
+          this.dealsCurrentIndex = this.dealsItems.length - 1;
+        } else if (this.dealsCurrentIndex >= this.dealsItems.length) {
+          this.dealsCurrentIndex = 0;
+        }
+
+        this.updateDealsPosition();
+      }
+
+      updateDealsPosition() {
+        const offset = -this.dealsCurrentIndex * 100;
+        this.dealsTrack.style.transform = `translateX(${offset}%)`;
+      }
+
+      setupAddToCart() {
+        this.addToCartButtons.forEach(button => {
+          button.addEventListener('click', (e) => {
+            const variantId = e.target.dataset.variantId;
+            this.addToCart(variantId, button);
+          });
+        });
+      }
+
+      addToCart(variantId, button) {
+        const originalText = button.textContent;
+        button.textContent = 'Adding...';
+        button.disabled = true;
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: variantId,
+            quantity: 1
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          button.textContent = 'Added!';
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+          }, 2000);
+
+          if (window.theme && window.theme.cart) {
+            window.theme.cart.refresh();
+          }
+
+          document.dispatchEvent(new CustomEvent('cart:refresh'));
+        })
+        .catch(error => {
+          console.error('Error adding to cart:', error);
+          button.textContent = 'Error';
+          setTimeout(() => {
+            button.textContent = originalText;
+            button.disabled = false;
+          }, 2000);
+        });
+      }
+    }
+
+    customElements.define('split-screen-section-{{ ai_gen_id }}', SplitScreenSection{{ai_gen_id}});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Split screen deals",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Image slider"
+    },
+    {
+      "type": "range",
+      "id": "slider_height",
+      "label": "Desktop height",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "slider_height_mobile",
+      "label": "Mobile height",
+      "min": 200,
+      "max": 600,
+      "step": 50,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "image_picker",
+      "id": "slider_image_1",
+      "label": "Slide 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "slider_image_2",
+      "label": "Slide 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "slider_image_3",
+      "label": "Slide 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "slider_image_4",
+      "label": "Slide 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "slider_image_5",
+      "label": "Slide 5"
+    },
+    {
+      "type": "header",
+      "content": "Daily deals"
+    },
+    {
+      "type": "text",
+      "id": "deals_title",
+      "label": "Title",
+      "default": "Daily Deal"
+    },
+    {
+      "type": "text",
+      "id": "deals_subtitle",
+      "label": "Subtitle",
+      "default": "Limited time offer"
+    },
+    {
+      "type": "range",
+      "id": "deals_title_size",
+      "label": "Title size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "color",
+      "id": "deals_bg_color",
+      "label": "Background color",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "color",
+      "id": "deals_title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "deals_text_color",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "deals_price_color",
+      "label": "Price color",
+      "default": "#ee0000"
+    },
+    {
+      "type": "product",
+      "id": "deal_product_1",
+      "label": "Product 1"
+    },
+    {
+      "type": "product",
+      "id": "deal_product_2",
+      "label": "Product 2"
+    },
+    {
+      "type": "product",
+      "id": "deal_product_3",
+      "label": "Product 3"
+    },
+    {
+      "type": "product",
+      "id": "deal_product_4",
+      "label": "Product 4"
+    },
+    {
+      "type": "product",
+      "id": "deal_product_5",
+      "label": "Product 5"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg",
+      "label": "Hover background color",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "color",
+      "id": "nav_button_bg",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "nav_button_color",
+      "label": "Button icon color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Split screen deals"
+    }
+  ]
+}
+{% endschema %}

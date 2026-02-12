@@ -1,0 +1,305 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "separator-1": {
+          "type": "separator",
+          "settings": {
+            "title": "Shipping"
+          }
+        },
+        "question-1": {
+          "type": "question",
+          "settings": {
+            "title": "Do you ship overseas?",
+            "answer": "<p>Yes, we ship all over the world. Shipping costs will apply, and will be added at checkout. We run discounts and promotions all year, so stay tuned for exclusive deals.</p>"
+          }
+        },
+        "question-2": {
+          "type": "question",
+          "settings": {
+            "title": "How long will it take to get my order?",
+            "answer": "<p>It depends on where you are. Orders processed here will take 5-7 business days to arrive. Overseas deliveries can take anywhere from 7-16 days. Delivery details will be provided in your confirmation email.</p>"
+          }
+        },
+        "question-3": {
+          "type": "question",
+          "settings": {
+            "title": "What shipping carriers do you use?",
+            "answer": "<p>We use all major carriers, and local courier partners. You’ll be asked to select a delivery method during checkout.</p>"
+          }
+        },
+        "separator-2": {
+          "type": "separator",
+          "settings": {
+            "title": "Product"
+          }
+        },
+        "question-4": {
+          "type": "question",
+          "settings": {
+            "title": "Can I return my product?",
+            "answer": "<p>We always aim for make sure our customers love our products, but if you do need to return an order, we’re happy to help. Just email us directly and we’ll take you through the process.</p>"
+          }
+        },
+        "question-5": {
+          "type": "question",
+          "settings": {
+            "title": "Can I get my product personalized?",
+            "answer": "<p>It depends on the creator and the product. All options are outlined on the product page, so look out for customization options there.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "separator-1",
+        "question-1",
+        "question-2",
+        "question-3",
+        "separator-2",
+        "question-4",
+        "question-5"
+      ],
+      "disabled": true,
+      "settings": {
+        "show_contact_info": true,
+        "contact_info_heading": "Any question?",
+        "contact_info_text": "<p>If we still haven't answered your question, you can contact us below and we will get back to you as soon as possible.</p>",
+        "contact_1_icon": "bi-phone",
+        "contact_1_heading": "Customer support",
+        "contact_1_text": "<p>Enter your text here</p>",
+        "contact_2_icon": "bi-email",
+        "contact_2_heading": "Send a message",
+        "contact_2_text": "<p>Enter your text here</p>"
+      }
+    },
+    "blocks_jxaiAF": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_4d6a328_84eFft": {
+          "type": "ai_gen_block_4d6a328",
+          "settings": {
+            "section_title": "FAQ",
+            "section_subtitle": "",
+            "scroll_offset": 80,
+            "columns_desktop": 4,
+            "columns_mobile": "2",
+            "grid_gap": 20,
+            "desktop_width_percent": 80,
+            "icon_size": 80,
+            "icon_spacing": 15,
+            "card_background": "#ffffff",
+            "card_border_color": "#000000",
+            "card_border_radius": 8,
+            "card_padding": 30,
+            "hover_effect": "scale",
+            "hover_overlay_color": "#000000",
+            "section_background": "rgba(0,0,0,0)",
+            "heading_color": "#000000",
+            "text_color": "#677279",
+            "item_heading_color": "#000000",
+            "item_description_color": "#677279",
+            "item_heading_size": 14,
+            "item_description_size": 12,
+            "item_1_enabled": true,
+            "item_1_icon": "shopify://shop_images/faq_1.png",
+            "item_1_heading": "PRODUCT QUESTIONS",
+            "item_1_description": "",
+            "item_1_link": "",
+            "item_1_scroll_target": "block-separator_JVBymW",
+            "item_2_enabled": true,
+            "item_2_icon": "shopify://shop_images/faq_1.png",
+            "item_2_heading": "GENERAL",
+            "item_2_description": "",
+            "item_2_link": "",
+            "item_2_scroll_target": "block-separator_C7dtiQ",
+            "item_3_enabled": true,
+            "item_3_icon": "shopify://shop_images/faq_1.png",
+            "item_3_heading": "SHIPPING QUESTIONS",
+            "item_3_description": "",
+            "item_3_link": "",
+            "item_3_scroll_target": "block-separator_TYiBN3",
+            "item_4_enabled": false,
+            "item_4_icon": "shopify://shop_images/faq_1.png",
+            "item_4_heading": "24/7 support",
+            "item_4_description": "<p>Always here to help</p>",
+            "item_4_link": "",
+            "item_4_scroll_target": "",
+            "item_5_enabled": false,
+            "item_5_heading": "",
+            "item_5_description": "",
+            "item_5_link": "",
+            "item_5_scroll_target": "",
+            "item_6_enabled": false,
+            "item_6_heading": "",
+            "item_6_description": "",
+            "item_6_link": "",
+            "item_6_scroll_target": "",
+            "item_7_enabled": false,
+            "item_7_heading": "",
+            "item_7_description": "",
+            "item_7_link": "",
+            "item_7_scroll_target": "",
+            "item_8_enabled": false,
+            "item_8_heading": "",
+            "item_8_description": "",
+            "item_8_link": "",
+            "item_8_scroll_target": "",
+            "item_9_enabled": false,
+            "item_9_heading": "",
+            "item_9_description": "",
+            "item_9_link": "",
+            "item_9_scroll_target": "",
+            "item_10_enabled": false,
+            "item_10_heading": "",
+            "item_10_description": "",
+            "item_10_link": "",
+            "item_10_scroll_target": "",
+            "item_11_enabled": false,
+            "item_11_heading": "",
+            "item_11_description": "",
+            "item_11_link": "",
+            "item_11_scroll_target": "",
+            "item_12_enabled": false,
+            "item_12_heading": "",
+            "item_12_description": "",
+            "item_12_link": "",
+            "item_12_scroll_target": ""
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_4d6a328_84eFft"
+      ],
+      "name": "Featured products tabs",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "faq_dmMQ6w": {
+      "type": "faq",
+      "blocks": {
+        "separator_JVBymW": {
+          "type": "separator",
+          "settings": {
+            "title": "PRODUCT QUESTIONS"
+          }
+        },
+        "question_BjfFU8": {
+          "type": "question",
+          "settings": {
+            "title": "Is my polyurethane part defective? test",
+            "answer": "<p>Polyurethane bumpers are a popular choice for many vehicle owners due to their flexibility, impact resistance, and lightweight construction. However, it’s important to understand that <strong>polyurethane parts do not come ready to paint or install right out of the box</strong>. They are designed for custom finishing and require proper <strong>prep work by a professional body shop</strong> before painting.</p><p>During manufacturing and shipping, polyurethane parts may show minor surface imperfections such as light scratches, nicks, mold lines, or uneven textures. These are <strong>normal characteristics of the material and production process</strong>—not defects. Unlike factory-painted OEM parts, aftermarket polyurethane components are supplied in a raw, unpainted state and always require surface preparation.</p><p>A professional custom body shop will typically perform the following steps to prepare the bumper for painting:</p><ul><li><strong>Cleaning and inspection:</strong> Removing mold residue, oils, or release agents left from the manufacturing process.</li><li><strong>Sanding and smoothing:</strong> Lightly sanding the entire surface to eliminate small imperfections and promote paint adhesion.</li><li><strong>Repair and refinement:</strong> Addressing any small pinholes, uneven spots, or edge lines with flexible filler if necessary.</li><li><strong>Adhesion promoter and primer:</strong> Applying a primer designed for flexible urethane materials to ensure paint bonds correctly.</li><li><strong>Final prep and paint:</strong> Sanding the primer coat for a smooth finish, then applying the chosen paint and clear coat for durability and shine.</li></ul><p>When properly prepped and painted, polyurethane bumpers provide an excellent finish and long-lasting flexibility that resists cracking or chipping. Taking the time to prepare the part correctly is a standard step in any professional installation and ensures the best possible appearance and performance.</p><p>If you receive a bumper with damage beyond normal surface marks—such as deep cracks, warping, or tearing—please contact us for assistance before proceeding with prep or paint.</p>"
+          }
+        },
+        "question_3UHzJP": {
+          "type": "question",
+          "settings": {
+            "title": "How to prepare polyurethane part for paint?",
+            "answer": "<h2>How to Prep Polyurethane (Urethane) Parts for Paint</h2><p>This guide applies to common polyurethane/urethane aero parts like <strong>bumpers, lips, side skirts, and spoilers</strong>. Urethane parts are flexible and durable, but they often carry <strong>mold release</strong> and can <strong>outgas oils</strong>. If you skip proper prep, you can run into fisheyes, lifting, peeling, or “mapping” later.</p><p><strong>Key idea:</strong>You want (1) contaminants removed, (2) a uniform scuffed surface, and (3) an adhesion system that bonds to plastic/urethane.</p><h3>Parts Covered</h3><ul><li>Front / rear bumpers</li><li>Front lips / splitters (urethane)</li><li>Side skirts / rocker extensions</li><li>Spoilers / wings (urethane)</li></ul><h3>Recommended Materials</h3><ul><li>Wax & grease remover / silicone remover (recommended: <strong>Spies Hecker #7090</strong>)</li><li><strong>3M 7447</strong> Scotch-Brite pad (surface scuff)</li><li>Fine putty for minor defects (recommended: <strong>Spies Hecker Fine Putty #7715</strong>)</li><li>Plastic adhesion primer/promoter (recommended: <strong>Spies Hecker #3304</strong>)</li><li>Primer (example: <strong>Tip Top #1255</strong>)</li><li><strong>3M 500-grit</strong> wet sandpaper + Simple Green/water mix</li><li>Lint-free towels, gloves, tack cloth (optional)</li></ul><p><strong>Safety note:</strong>Always follow the product label/SDS for flash times, PPE, and temperature limits. Avoid overheating urethane—too much heat can warp flexible parts.</p><h3>Step-by-Step Prep Process</h3><p><strong>Step 1) Warm the Part to “Sweat Out” Oils (Recommended)</strong></p><ul><li><strong>Best option:</strong> Bake at 80°C / 176°F for 2 hours (if you have a bake booth).</li><li><strong>No booth?</strong> Use direct sunlight or a hair dryer/heat gun on low, keeping it moving. Warm evenly.</li><li>Let it cool to a comfortable handling temp, then clean right away (heat brings contaminants to the surface).</li></ul><p><strong>Step 2) Initial Cleaning (Inside and Outside)</strong></p><ul><li>Thoroughly clean the part <strong>inside and out</strong> with a silicone remover / wax & grease remover.</li><li>Recommended product: <strong>Spies Hecker #7090 Silicone Remover</strong>.</li><li>Use clean lint-free towels and change towels often (don’t smear contamination back onto the surface).</li><li>After this point, avoid touching the paint side with bare hands—use gloves.</li></ul><p><strong>Step 3) Scuff the Surface for Mechanical Adhesion</strong></p><ul><li>Mist the outside surface with silicone remover while scuffing (helps lift residue as you abrade).</li><li>Scuff with a <strong>3M 7447 Scotch-Brite</strong> pad until the finish is <strong>uniformly dull</strong> (no shiny spots).</li><li>Focus on edges, body lines, vents, and tight curves—those areas are the first to peel if not scuffed well.</li><li>Clean again with <strong>Spies Hecker #7090</strong> using a fresh rag.</li></ul><p><strong>Step 4) Inspect & Repair Minor Defects</strong></p><ul><li>Inspect for scratches, nicks, pinholes, mold lines, or small surface imperfections.</li><li>Fill minor defects with <strong>Spies Hecker Fine Putty #7715</strong>.</li><li>Once cured, sand smooth using a fine grit soft-back sanding sponge.</li><li>Clean again with <strong>Spies Hecker #7090</strong> to remove sanding dust and residue.</li></ul><p><strong>Step 5) Apply Plastic Adhesion Primer/Promoter (Critical on Urethane)</strong></p><ul><li>Apply <strong>Spies Hecker #3304 Plastic Adhesion Primer</strong> evenly across the surface.</li><li>Let it dry/flash for about 5 minutes (or per label).</li><li><strong>Tip:</strong> Don’t over-apply—this layer should be thin and even.</li></ul><p><strong>Step 6) Primer Application</strong></p><ul><li><strong>First coat:</strong> Apply a light coat of <strong>Tip Top #1255 Primer</strong>, flash 5–10 minutes.</li><li><strong>Second coat:</strong> Apply a heavier wet coat, flash 10–15 minutes.</li><li><strong>Optional heat cure (if available):</strong> Cure at 90°C / 194°F for 1.5 hours, then cool completely.</li></ul><p><strong>Step 7) Wet Sand for a Paint-Ready Finish</strong></p><ul><li>Wet sand using <strong>3M 500-grit</strong> wet sandpaper.</li><li>Use a Simple Green + water mix as lubricant (keep it light—don’t create heavy foam).</li><li>Sand evenly and be careful on edges to avoid burn-through.</li><li>Rinse well and dry completely before final wipe.</li></ul><p><strong>Step 8) Final Clean Before Paint</strong></p><ul><li>Wipe down with <strong>Spies Hecker #7090</strong> using a clean, lint-free rag.</li><li>Allow full flash-off, then tack cloth (optional) right before base coat.</li></ul><p><strong>Step 9) Paint (Base + Clear)</strong></p><ul><li>Apply base coat and clear coat per the paint manufacturer’s recommendations for film build and flash times.</li><li>If baking the final finish, follow the paint system’s bake schedule (don’t “overbake” flexible parts).</li></ul><h3>Common Issues (And What Usually Causes Them)</h3><ul><li><strong>Fisheyes:</strong> mold release / silicone contamination or poor towel discipline</li><li><strong>Peeling / lifting:</strong> missed scuff areas, skipped adhesion promoter, or incorrect primer system</li><li><strong>Solvent popping:</strong> heavy coats too fast, not enough flash, trapped gases</li><li><strong>Edge failure:</strong> edges not scuffed/cleaned well or primer too thin on corners</li></ul><p><strong>Quick pro tip for bumpers & lips:</strong>Always scuff and clean the tight corners, grille openings, and sharp edges twice. Those are the spots that fail first if anything gets missed.</p>"
+          }
+        },
+        "question_bfjz6K": {
+          "type": "question",
+          "settings": {
+            "title": "How to prep fiberglass part?",
+            "answer": "<h1>How to Prepare Fiberglass Aftermarket Parts for Paint</h1><ol><li><strong>Inspect the Part</strong>Check for damage: Look for cracks, pinholes, or other surface imperfections.Test fit: Before any prep work, ensure the part fits your vehicle properly. Make any necessary adjustments now.</li><li><strong>Clean the Surface</strong>Wash thoroughly: Use a mild detergent and warm water to remove dirt and grease.Degrease: Wipe the part with a wax and grease remover to eliminate any contaminants that might interfere with adhesion.</li><li><strong>Sand the Surface</strong>Initial sanding: Use 180-220 grit sandpaper to scuff the entire surface. This step removes the glossy gel coat and provides a key for the primer.Check for smoothness: Feel the surface with your hand to ensure it's evenly sanded.Blow off dust: Use compressed air or a clean microfiber cloth to remove sanding debris.</li><li><strong>Fill Imperfections</strong>Spot filling: Apply a fiberglass-compatible body filler to any pinholes, cracks, or uneven areas.Sand the filler: Once cured, sand the repaired areas with 220-320 grit sandpaper until smooth.Re-check for imperfections: Repeat filling and sanding if needed.</li><li><strong>Apply Primer</strong>Choose the right primer: Use an epoxy or polyester primer that adheres well to fiberglass.Spray the primer: Apply an even coat according to the manufacturer's instructions.Drying time: Allow the primer to fully cure, as specified on the product label.</li><li><strong>Sand the Primer</strong>Wet sanding: Use 400-600 grit wet sandpaper to smooth the primed surface.Check the texture: The surface should feel completely smooth and ready for paint.Clean again: Wipe down the part with wax and grease remover after sanding.</li><li><strong>Apply a Guide Coat (Optional)</strong>Why use a guide coat? A thin, contrasting color helps reveal uneven sanding or imperfections.Sand lightly: Use fine-grit sandpaper (600+ grit) to remove the guide coat.</li><li><strong>Final Cleaning</strong>Wipe down: Use a tack cloth to remove all dust and debris.Inspect: Ensure the part is clean, smooth, and free of imperfections.</li><li><strong>Paint the Part</strong>Base coat: Apply multiple thin coats of automotive-grade paint.Clear coat: After the base coat dries, apply a clear coat for durability and shine.Cure and polish: Allow the paint to cure fully and polish if needed.</li><li><strong>Install the Part</strong>Once the paint is fully cured and hardened, install the part on your vehicle.</li></ol>"
+          }
+        },
+        "question_bPdMJG": {
+          "type": "question",
+          "settings": {
+            "title": "Repair Procedures for Polyurethane Bumper or Part.",
+            "answer": "<h1>Repair Procedures for Polyurethane Bumper or Part</h1><h2>Step 1: Assess and Clean</h2><ul><li><strong>Inspect the Damage:</strong> Examine the damaged area to understand the extent of the repair needed.</li><li><strong>Clean the Surface:</strong> Use a wax and grease remover or rubbing alcohol to clean the area thoroughly.</li></ul><h2>Step 2: Remove Damaged Material</h2><ul><li><strong>Trim Loose Pieces:</strong> Use a utility knife to cut away any jagged or loose polyurethane.</li><li><strong>Sand the Area:</strong> Roughen the surface around the damage with 80-grit sandpaper to promote adhesion.</li></ul><h2>Step 3: Heat and Reshape (If Necessary)</h2><ul><li><strong>Apply Heat:</strong> Gently heat the damaged area with a heat gun to make it pliable.</li><li><strong>Reshape:</strong> Carefully mold the material back to its original shape.</li><li><strong>Cool Down:</strong> Allow the area to cool and set in the new shape.</li></ul><h2>Step 4: Prepare for Repair</h2><ul><li><strong>Support the Repair:</strong> For holes or deep cracks, place masking tape behind the area to support the repair material.</li><li><strong>Drill Holes (Optional):</strong> Drill small holes along cracks to enhance adhesive bonding.</li></ul><h2>Step 5: Apply Repair Adhesive</h2><ul><li><strong>Mix Adhesive:</strong> Prepare the two-part polyurethane adhesive according to the instructions.</li><li><strong>Apply Adhesive:</strong> Spread the adhesive over the damaged area, ensuring it fills all gaps.</li><li><strong>Feather Edges:</strong> Smooth out the adhesive to blend with the surrounding surface.</li></ul><h2>Step 6: Allow to Cure</h2><ul><li><strong>Let it Set:</strong> Allow the adhesive to cure fully as per the manufacturer's recommended time.</li><li><strong>Avoid Disturbance:</strong> Do not move or touch the area during curing.</li></ul><h2>Step 7: Sand the Repaired Area</h2><ul><li><strong>Initial Sanding:</strong> Start with 120-grit sandpaper to smooth out excess adhesive.</li><li><strong>Progressive Sanding:</strong> Move to 220-grit and then 400-grit sandpaper for a finer finish.</li><li><strong>Use a Sanding Block:</strong> Maintain an even surface while sanding.</li></ul><h2>Step 8: Apply Plastic Body Filler (If Needed)</h2><ul><li><strong>Mix Filler:</strong> Prepare the plastic body filler following the product guidelines.</li><li><strong>Apply Filler:</strong> Spread a thin layer over any remaining imperfections.</li><li><strong>Sand Smooth:</strong> Once dry, sand with 400-grit sandpaper until the area is smooth.</li></ul><h2>Step 9: Clean and Mask</h2><ul><li><strong>Final Cleaning:</strong> Wipe the area with a clean cloth and wax and grease remover.</li><li><strong>Mask Surrounding Areas:</strong> Use masking tape and paper to protect areas from overspray.</li></ul><h2>Step 10: Apply Primer</h2><ul><li><strong>Select Primer:</strong> Use a primer compatible with plastic surfaces.</li><li><strong>Apply Primer:</strong> Spray an even coat over the repaired area.</li><li><strong>Dry and Sand:</strong> Let it dry, then lightly sand with 400-grit sandpaper.</li></ul><h2>Step 11: Paint the Area</h2><ul><li><strong>Prepare Paint:</strong> Use automotive paint that matches your vehicle's color.</li><li><strong>Apply Paint:</strong> Spray several thin coats, allowing each to dry before the next.</li><li><strong>Blend Edges:</strong> Extend each coat slightly beyond the previous to blend with existing paint.</li></ul><h2>Step 12: Apply Clear Coat (Optional)</h2><ul><li><strong>Apply Clear Coat:</strong> For added shine and protection, spray one or two thin coats over the painted area.</li><li><strong>Allow to Dry:</strong> Let the clear coat dry completely.</li></ul><h2>Step 13: Final Steps</h2><ul><li><strong>Remove Masking Materials:</strong> Carefully take off all tape and paper.</li><li><strong>Inspect the Repair:</strong> Check for any imperfections and touch up if necessary.</li><li><strong>Polish (Optional):</strong> Once fully cured, polish the area to enhance the finish.</li></ul>"
+          }
+        },
+        "separator_C7dtiQ": {
+          "type": "separator",
+          "settings": {
+            "title": "GENERAL"
+          }
+        },
+        "question_ri4T37": {
+          "type": "question",
+          "settings": {
+            "title": "What is the return policy?",
+            "answer": "<h2>Product Return Policy</h2><p>At Wings West, we strive to ensure that our customers are satisfied with their purchases. However, if for any reason you are not completely satisfied, we offer a return option, subject to the following terms and conditions.</p><h3>Return Conditions:</h3><ul><li>All returns must be made within 10 days of the delivery date.</li><li>Products must be in new, unused condition and in their original packaging to qualify for a return.</li><li>Customized or special order items are non-refundable.</li><li>A restocking fee of 35% will be applied to all returned items.</li></ul><h3>Return Process:</h3><ul><li>To initiate a return, please contact our customer service team to obtain a Return Merchandise Authorization (RMA) number.</li><li>The RMA number must be clearly marked on the outside of the return package. Returns without an RMA number may not be accepted.</li><li>Shipping costs for returns are the responsibility of the buyer, and original shipping charges are non-refundable.</li></ul><h3>Refunds:</h3><p>Once the returned product is received and inspected, we will process the refund, minus the 30% restocking fee. Refunds will be issued to the original payment method within 7-10 business days.</p><h3>Damaged or Defective Items:</h3><p>If you receive a damaged or defective item, please contact us the same day of the delivery. We will work to resolve the issue and, if necessary, provide a replacement or refund without applying the restocking fee.</p><p>Please note that returns may take up to 2 weeks to process once received. We appreciate your understanding and cooperation.</p>"
+          }
+        },
+        "question_MTWami": {
+          "type": "question",
+          "settings": {
+            "title": "What is the cancellation policy for Special Order Parts?",
+            "answer": "<p><strong>Special Orders Policy:</strong></p><p>All special orders require a nonrefundable deposit of the total cost. In the event of any cancellation by the Buyer, for any reason, the deposit will be immediately forfeited to Wings West.</p><p><strong>Shipping Terms:</strong></p><p>Wings West is not liable for any delays in shipments. All shipping dates provided are estimates, and Buyer is not entitled to any chargebacks, price reductions, or offsets due to late shipments or failure to deliver within the estimated timeframe.</p><p><strong>Unclaimed Special Orders:</strong></p><p>If special order items remain unclaimed for over 30 days after Wings West has received the parts in stock, and the Buyer has made no effort to retrieve their order, the order will be considered canceled, and all previously deposited funds will be forfeited to Wings West.</p>"
+          }
+        },
+        "separator_TYiBN3": {
+          "type": "separator",
+          "settings": {
+            "title": "Shipping Questions"
+          }
+        },
+        "question_99VHKN": {
+          "type": "question",
+          "settings": {
+            "title": "Receiving Instruction",
+            "answer": "<h2>IMPORTANT DELIVERY GUIDELINES</h2><p><strong>Check Your Shipment:</strong> Before starting a detailed inspection for any damage, ensure that you count and verify all the items listed on your order to confirm that everything has been received.</p><h3>Inspect for Damage:</h3><p>When your shipment arrives, take a moment to carefully check the box for any signs of visible damage, such as dents, punctures, or tears. If you spot any, be sure to note it on the delivery receipt by writing \"Damaged.\"</p><h3>Document Any Damage:</h3><p>It is critical to document any visible damage to the packaging or its contents. We recommend taking photographs of any damage. Also, make sure to accurately note the damage on the delivery receipt and write “Damaged” clearly on the receipt.</p><h3>Refuse Damaged Shipments:</h3><p>If the box appears significantly damaged or compromised, it is recommended to refuse the shipment. Be sure to clearly state \"Damaged\" as the reason for refusal on the delivery receipt provided by the carrier.</p><h3>Severe Damage:</h3><p>In the case of severe damage to the box, we advise you to be extra cautious. If you notice extensive damage to the packaging, it’s best to refuse the shipment and make sure the damage is noted on the receipt. Please take a picture of both the damage and the delivery receipt.</p><h3>Rejecting Severely Damaged Packages:</h3><p>For seriously damaged boxes, you should refuse the shipment. Clearly write \"Damaged\" on the delivery receipt and take photos of the damage as well as the receipt itself.</p><h3>Contactless Delivery:</h3><p>If you receive contactless delivery, immediately inspect the package upon arrival for any signs of damage. Should you notice any issues, take photos and report them to both us and the freight company on the same day of delivery. Failing to report damages within the same day may result in your claim being denied.</p><h3>Signature and Refusal:</h3><p>When accepting the shipment, sign the delivery receipt. However, if you refuse the delivery due to damages, make sure the refusal is clearly noted and signed on the receipt.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "separator_JVBymW",
+        "question_BjfFU8",
+        "question_3UHzJP",
+        "question_bfjz6K",
+        "question_bPdMJG",
+        "separator_C7dtiQ",
+        "question_ri4T37",
+        "question_MTWami",
+        "separator_TYiBN3",
+        "question_99VHKN"
+      ],
+      "name": "Frequently Asked Questions",
+      "settings": {
+        "show_contact_info": true,
+        "contact_info_heading": "Any question?",
+        "contact_info_text": "<p>If we still haven't answered your question, you can contact us below and we will get back to you as soon as possible.</p>",
+        "contact_1_icon": "bi-phone",
+        "contact_1_heading": "Customer support",
+        "contact_1_text": "<p>Enter your text here</p>",
+        "contact_2_icon": "bi-email",
+        "contact_2_heading": "Send a message",
+        "contact_2_text": "<p>Enter your text here</p>"
+      }
+    },
+    "blocks_8MKjkL": {
+      "type": "_blocks",
+      "name": "Featured products tabs",
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "faq",
+    "blocks_jxaiAF",
+    "faq_dmMQ6w",
+    "blocks_8MKjkL"
+  ]
+}

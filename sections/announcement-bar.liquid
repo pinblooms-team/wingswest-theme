@@ -1,0 +1,401 @@
+{%- capture section_settings -%}
+{
+  "showNewsletter": {{ section.settings.show_newsletter | json }}
+}
+{%- endcapture -%}
+<section data-section-id="{{ section.id }}" data-section-type="announcement-bar" data-section-settings="{{ section_settings | escape_once }}">
+  {%- if section.settings.show_newsletter -%}
+    <div id="announcement-bar-newsletter" class="announcement-bar__newsletter hidden-phone" aria-hidden="true">
+      <div class="container">
+        <div class="announcement-bar__close-container">
+          <button class="announcement-bar__close" data-action="toggle-newsletter">
+            <span class="visually-hidden">{{ 'general.accessibility.close' | t }}</span>
+            {%- render 'icon', icon: 'close' -%}
+          </button>
+        </div>
+      </div>
+      <div class="container container--extra-narrow">
+        <div class="announcement-bar__newsletter-inner">
+          {%- if section.settings.newsletter_title != blank -%}
+            <h2 class="heading h1">{{ section.settings.newsletter_title | escape }}</h2>
+          {%- endif -%}
+          {%- if section.settings.newsletter_content != blank -%}
+            <div class="rte">
+              {{ section.settings.newsletter_content }}
+            </div>
+          {%- endif -%}
+          {%- assign newsletter_id = 'newsletter-' | append: section.id -%}
+          <div class="newsletter">
+            {%- form 'customer', id: newsletter_id, class: 'form newsletter__form' -%}
+              {%- if form.posted_successfully? -%}
+                <p class="alert alert--success alert--center">{{ 'home_page.newsletter.success' | t }}</p>
+                {%- if form.context == 'announcement-bar' -%}
+                  {%- assign open_announcement = true -%}
+                {%- endif -%}
+              {%- else -%}
+                {%- if form.errors -%}
+                  <p class="alert alert--error">{{ form.errors.messages['email'] }}</p>
+                {%- endif -%}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                <input type="hidden" name="contact[context]" value="announcement-bar">
+                <div class="form__input-row">
+                  <div class="form__input-wrapper form__input-wrapper--labelled">
+                    <input type="email" id="announcement[contact][email]" name="contact[email]" class="form__field form__field--text" autofocus required>
+                    <label for="announcement[contact][email]" class="form__floating-label">{{ 'home_page.newsletter.input' | t }}</label>
+                  </div>
+                  <button type="submit" class="form__submit button button--primary">{{ 'home_page.newsletter.submit' | t }}</button>
+                </div>
+              {%- endif -%}
+            {%- endform -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="announcement-bar">
+    <div class="container">
+      <div class="announcement-bar__inner announcement-bar__inner--multi">
+        {%- comment -%} Left Side - Social Media Icon {%- endcomment -%}
+        <div class="announcement-bar__left">
+          {%- if section.settings.show_social_icon -%}
+            {%- if section.settings.facebook_url != blank -%}
+              <a href="{{ section.settings.facebook_url }}" target="_blank" rel="noopener" class="announcement-bar__social-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+        {%- comment -%} Center - Main Announcement Text {%- endcomment -%}
+        <div class="announcement-bar__center">
+          {%- if section.settings.announcement_text != blank -%}
+            <span class="announcement-bar__text">{{ section.settings.announcement_text | escape }}</span>
+          {%- endif -%}
+        </div>
+        {%- comment -%} Right Side - Multiple Links {%- endcomment -%}
+        <div class="announcement-bar__right">
+          <div class="announcement-bar__links">
+            {%- if section.settings.link_1_text != blank -%}
+              {%- if section.settings.link_1_url != blank -%}
+                <a href="{{ section.settings.link_1_url }}" class="announcement-bar__link">
+                  {{ section.settings.link_1_text | escape }}
+                </a>
+              {%- else -%}
+                <span class="announcement-bar__link">{{ section.settings.link_1_text | escape }}</span>
+              {%- endif -%}
+            {%- endif -%}
+         {%- if customer -%}
+
+  <span class="announcement-bar__separator">/</span>
+  <a href="{{ routes.account_url }}" class="announcement-bar__link">
+    My Account
+  </a>
+
+{%- else -%}
+
+  {%- if section.settings.link_2_text != blank -%}
+    <span class="announcement-bar__separator">/</span>
+    {%- if section.settings.link_2_url != blank -%}
+      <a href="{{ section.settings.link_2_url }}" class="announcement-bar__link">
+        {{ section.settings.link_2_text | escape }}
+      </a>
+    {%- else -%}
+      <span class="announcement-bar__link">
+        {{ section.settings.link_2_text | escape }}
+      </span>
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if section.settings.link_3_text != blank -%}
+    <span class="announcement-bar__separator">/</span>
+    {%- if section.settings.link_3_url != blank -%}
+      <a href="{{ section.settings.link_3_url }}" class="announcement-bar__link">
+        {{ section.settings.link_3_text | escape }}
+      </a>
+    {%- else -%}
+      <span class="announcement-bar__link">
+        {{ section.settings.link_3_text | escape }}
+      </span>
+    {%- endif -%}
+  {%- endif -%}
+
+{%- endif -%}
+
+            {%- if section.settings.link_4_text != blank -%}
+              <span class="announcement-bar__separator">/</span>
+              {%- if section.settings.link_4_url != blank -%}
+                <a href="{{ section.settings.link_4_url }}" class="announcement-bar__link">
+                  {{ section.settings.link_4_text | escape }}
+                </a>
+              {%- else -%}
+                <span class="announcement-bar__link">{{ section.settings.link_4_text | escape }}</span>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .announcement-bar {
+    background: {{ section.settings.background }};
+    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.font_size }}px;
+    padding: {{ section.settings.vertical_padding }}px 0;
+  }
+  .announcement-bar__inner--multi {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .announcement-bar__left {
+    display: flex;
+    align-items: center;
+  }
+  .announcement-bar__social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: {{ section.settings.text_color }};
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+  .announcement-bar__social-icon:hover {
+    opacity: 0.7;
+  }
+  .announcement-bar__center {
+    flex: 1;
+    text-align: center;
+  }
+  .announcement-bar__text {
+    font-weight: {{ section.settings.text_weight }};
+  }
+  .announcement-bar__right {
+    display: flex;
+    align-items: center;
+  }
+  .announcement-bar__links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .announcement-bar__link {
+    color: {{ section.settings.text_color }};
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.3s ease;
+  }
+  .announcement-bar__link:hover {
+    opacity: 0.7;
+  }
+  .announcement-bar__separator {
+    color: {{ section.settings.text_color }};
+    opacity: 0.5;
+  }
+
+  /* Mobile Responsive */
+  @media screen and (max-width: 768px) {
+    .announcement-bar__inner--multi {
+      gap: 10px;
+    }
+    {% comment %} .announcement-bar__left,
+    .announcement-bar__center,
+    .announcement-bar__right {
+      width: 100%;
+    } {% endcomment %}
+    .announcement-bar__links {
+      justify-content: center;
+      font-size: 12px;
+    }
+    .announcement-bar__left {
+      justify-content: center;
+    }
+  }
+</style>
+<script>
+  document.documentElement.style.setProperty('--announcement-bar-height', document.getElementById('shopify-section-{{ section.id }}').clientHeight + 'px');
+</script>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "class": "shopify-section--announcement-bar",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors & Style"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#ff0000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 13
+    },
+    {
+      "type": "select",
+      "id": "text_weight",
+      "label": "Text weight",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "bold",
+          "label": "Bold"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "range",
+      "id": "vertical_padding",
+      "min": 5,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical padding",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Social Media Icon"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_icon",
+      "label": "Show Facebook icon",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "header",
+      "content": "Center Text"
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "Welcome to our store!"
+    },
+    {
+      "type": "header",
+      "content": "Link 1"
+    },
+    {
+      "type": "text",
+      "id": "link_1_text",
+      "label": "Link 1 text",
+      "default": "FAQ"
+    },
+    {
+      "type": "url",
+      "id": "link_1_url",
+      "label": "Link 1 URL"
+    },
+    {
+      "type": "header",
+      "content": "Link 2"
+    },
+    {
+      "type": "text",
+      "id": "link_2_text",
+      "label": "Link 2 text",
+      "default": "Sign In"
+    },
+    {
+      "type": "url",
+      "id": "link_2_url",
+      "label": "Link 2 URL"
+    },
+    {
+      "type": "header",
+      "content": "Link 3"
+    },
+    {
+      "type": "text",
+      "id": "link_3_text",
+      "label": "Link 3 text",
+      "default": "Create an Account"
+    },
+    {
+      "type": "url",
+      "id": "link_3_url",
+      "label": "Link 3 URL"
+    },
+    {
+      "type": "header",
+      "content": "Link 4 (Optional)"
+    },
+    {
+      "type": "text",
+      "id": "link_4_text",
+      "label": "Link 4 text"
+    },
+    {
+      "type": "url",
+      "id": "link_4_url",
+      "label": "Link 4 URL"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "paragraph",
+      "content": "Customers who subscribe will have their email address added to the \"accepts marketing\" customer list."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Show newsletter popup",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Newsletter heading",
+      "default": "Newsletter"
+    },
+    {
+      "type": "richtext",
+      "id": "newsletter_content",
+      "label": "Newsletter text",
+      "default": "<p>Subscribe to get special offers and updates</p>"
+    }
+  ]
+}
+{% endschema %}
