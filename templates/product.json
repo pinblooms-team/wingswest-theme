@@ -15,7 +15,7 @@
         "product_meta": {
           "type": "product_meta",
           "settings": {
-            "show_vendor": true,
+            "show_vendor": false,
             "show_sku": false,
             "show_reviews_badge": false,
             "show_share_buttons": true
@@ -84,7 +84,7 @@
         "enable_video_looping": false,
         "enable_image_zoom": true,
         "zoom_effect": "outside",
-        "carousel_effect": "fade"
+        "carousel_effect": "slide"
       }
     },
     "product-recommendations": {

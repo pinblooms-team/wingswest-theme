@@ -99,7 +99,7 @@
             "columns_desktop": 4,
             "columns_mobile": "2",
             "grid_gap": 20,
-            "desktop_width_percent": 80,
+            "desktop_width_percent": 100,
             "icon_size": 80,
             "icon_spacing": 15,
             "card_background": "#ffffff",

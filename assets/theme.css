@@ -834,7 +834,7 @@ html {
 }
 
 .link:hover, .link:focus {
-  color: var(--accent-color);
+  color: var(--header-accent-color);
 }
 
 .link--secondary:hover, .link--secondary:focus {
@@ -5312,7 +5312,7 @@ select option {
 
   .header__search-bar-wrapper.is-visible {
     visibility: visible;
-    margin-bottom: -59px;
+    margin-bottom: -82px;
   }
 
   .header__search-bar-wrapper.is-fixed {

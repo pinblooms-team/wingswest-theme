@@ -10,7 +10,7 @@ h2{
   
 @media screen and (min-width: 1000px) {
   .nav-bar {
-    background-color: #F34529;
+    background-color: var(--header-accent-color);
 }
 }
 .shopify-section--blocks + .shopify-section--blocks {
@@ -57,7 +57,7 @@ h2{
 }
 
 .nav-dropdown li:hover{
-  background-color:#ff2d37;
+  background-color:var(--header-accent-color);
 }
 
 
@@ -66,7 +66,7 @@ h2{
 }
 
 .search-bar__submit {
-  background-color: #ff2d37;
+  background-color: var(--header-accent-color);
 }
 
 
@@ -469,8 +469,19 @@ div#ZooomyList p.zooomypwishmsg {
   margin: 0px !important;
   cursor: pointer;
 }
+.product-tagline {
+    margin-bottom: 0;
+}
+@media screen and (min-width: 640px) and (max-width: 767px) {
+div .header__logo-image{
+  max-width: 110px;
+}
+}
 /* Mobile Responsive (< 768px) */
 @media screen and (max-width: 767px) {
+  .product-tagline{
+    font-size: 13px;
+  }
   .product-item {
     padding: 10px;
 }
@@ -484,7 +495,34 @@ div#ZooomyList p.zooomypwishmsg {
 .product-tab-btn::last-child{
   margin-right: 0px;
 }
+.faq__group{
+  padding-inline: 20px;
+}
+.faq__item{
+  border: 1px solid var(--border-color) !important;
+}
+.faq__item + .faq__item{
+  margin-top: 10px;
+}
+.faq__question, .faq__answer-wrapper{
+  padding-inline: 0.5em;
+  font-size: 15px;
+}
+.faq__answer {
+    margin: 10px;
+}
 
+}
+@media screen and (max-width: 639px) {
+.faq__answer h1 {
+    font-size: 17px;
+    font-weight: 600;
+}
+.faq__answer h2 {
+    margin-block: 20px 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
 }
 
 @media screen and (max-width: 480px) {
@@ -493,6 +531,14 @@ div#ZooomyList p.zooomypwishmsg {
     font-size: 13px;
     padding: 8px 0px;
   }
+  div .filter-headinbg-block h2 {
+    font-size: 22px !important;
+  }
+  .filter-headinbg-block h2 ~ div {
+    line-height: 133%;
+    font-size: 13px !important;
+    margin-top: 7px;
+}
 }
 
 .icon--wishlist-heart {

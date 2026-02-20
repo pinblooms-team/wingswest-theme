@@ -1,6 +1,7 @@
 <footer class="footer" data-section-id="{{ section.id }}" data-section-type="footer" role="contentinfo">
-  <div class="container">
-    <div class="footer__wrapper">
+  <div class="containers">
+        <div class="footer__wrapper">
+      <div class="container">
       {%- if section.blocks.size > 0 -%}
         <div class="footer__block-list">
           {%- for block in section.blocks -%}
@@ -78,15 +79,17 @@
           {%- endfor -%}
         </div>
       {%- endif -%}
+        </div>
     </div>
-<div class="footer__wrapper">
+    <div class="footer__wrappers bottom-footer">
       {%- if section.blocks.size > 0 -%}
-        <div class="footer__block-list">
+        <div class="footer__block-list-s">
           {%- for block in section.blocks -%}
             {%- case block.type -%}
               {%- when 'newsletter' -%}
                 <div class="custom-newsletter-section" {{ block.shopify_attributes }}>
-                  <div class="custom-newsletter-container">
+                    <div class="container">
+                       <div class="custom-newsletter-container">
                     <div class="custom-newsletter-left">
                       <span class="custom-newsletter-follow-text">FOLLOW US</span>
                       <a href="https://www.facebook.com/wingswestinternational/" class="custom-newsletter-social-btn" target="_blank" rel="noopener">
@@ -123,6 +126,7 @@
                       {%- endform -%}
                     </div>
                   </div>
+                     </div> 
                 </div>
 
             {%- endcase -%}
@@ -130,7 +134,9 @@
         </div>
       {%- endif -%}
 
-      <aside class="footer__aside">
+    <div class="copy-footer">
+      <div class="container">
+          <aside class="footer__aside">
         {%- if section.settings.show_country_selector and localization.available_countries.size > 1 -%}
           {%- assign country_selector = true -%}
         {%- endif -%}
@@ -139,7 +145,7 @@
           {%- assign locale_selector = true -%}
         {%- endif -%}
 
-        <div class="footer__aside-item footer__aside-item--localization {% if country_selector == false and locale_selector == false %}hidden-pocket{% endif %}">
+        <div class="hidden-pocket footer__aside-item footer__aside-item--localization {% if country_selector == false and locale_selector == false %}hidden-pocket{% endif %}">
           {%- if locale_selector or country_selector -%}
             {%- form 'localization', id: 'localization_form_footer', class: 'footer__localization-form' -%}
               {%- if locale_selector -%}
@@ -217,8 +223,12 @@
           {% comment %} {%- capture copyright_info -%}© {{ 'now' | date: '%Y' }} {{ shop.name }}<br>{{ powered_by_link }}{%- endcapture -%}
           <p class="hidden-pocket">{{ copyright_info }}</p> {% endcomment %}
           {% comment %} =============Custom code=============== {% endcomment %}
-           {%- capture copyright_info -%}© Wingswest.com. All rights reserved.2025 {%- endcapture -%}
+            {%- capture copyright_info -%}
+              © Wingswest.com. All rights reserved. {{ 'now' | date: '%Y' }}
+              {%- endcapture -%}
+           {% comment %} {%- capture copyright_info -%}© Wingswest.com. All rights reserved.2026 {%- endcapture -%} {% endcomment %}
           <p class="hidden-pocket">{{ copyright_info }}</p>
+
         </div>
 
         {%- if section.settings.show_social_media -%}
@@ -257,6 +267,8 @@
           <p>{{ copyright_info }}</p>
         </div>
       </aside>
+      </div>
+    </div>
     </div>
 
   </div>
