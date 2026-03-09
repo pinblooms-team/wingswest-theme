@@ -1,46 +1,154 @@
 <style>
-  #shopify-section-{{ section.id }} {
-    background: {{ section.settings.background }};
-    color: {{ section.settings.text }};
+  #shopify-section-{{ section.id }} .newsletter-banner {
+    {% if section.settings.background_image %}
+      background-image: url({{ section.settings.background_image | image_url: width: 2000 }});
+      background-size: cover;
+      background-position: center;
+    {% else %}
+      background-color: {{ section.settings.background }};
+    {% endif %}
+    min-height: {{ section.settings.section_height }}px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 40px 0;
+  }
+
+  #shopify-section-{{ section.id }} .newsletter-banner__overlay {
+    background: {{ section.settings.overlay_background }};
+    color: {{ section.settings.overlay_text }};
+    padding: {{ section.settings.overlay_padding }}px;
+    max-width: {{ section.settings.overlay_width }}px;
+    margin-right: 40px;
+  }
+
+  #shopify-section-{{ section.id }} .newsletter-banner__title {
+    font-size: {{ section.settings.title_size }}px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+  }
+
+  #shopify-section-{{ section.id }} .newsletter-banner__subtitle {
+    font-size: {{ section.settings.subtitle_size }}px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0 0 24px 0;
+    line-height: 1.3;
+  }
+
+  #shopify-section-{{ section.id }} .newsletter-banner__form-row {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  #shopify-section-{{ section.id }} .newsletter-banner__input {
+    flex: 1;
+    min-width: 0;
+    height: 48px;
+    padding: 0 16px;
+    border: 1px solid {{ section.settings.input_border }};
+    background: {{ section.settings.input_background }};
+    color: {{ section.settings.overlay_text }};
+    font-size: 14px;
+  }
+
+  #shopify-section-{{ section.id }} .newsletter-banner__input::placeholder {
+    color: #999;
+  }
+
+  #shopify-section-{{ section.id }} .newsletter-banner__submit {
+    height: 48px;
+    padding: 0 24px;
+    background: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  #shopify-section-{{ section.id }} .newsletter-banner__submit:hover {
+    opacity: 0.9;
+  }
+
+  #shopify-section-{{ section.id }} .newsletter-banner__alert {
+    margin-top: 12px;
+    font-size: 14px;
+  }
+
+  #shopify-section-{{ section.id }} .newsletter-banner__alert--success {
+    color: #0a0;
+  }
+
+  #shopify-section-{{ section.id }} .newsletter-banner__alert--error {
+    color: #c00;
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} .newsletter-banner {
+      justify-content: center;
+      padding: 30px 20px;
+    }
+
+    #shopify-section-{{ section.id }} .newsletter-banner__overlay {
+      margin-right: 0;
+      max-width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .newsletter-banner__form-row {
+      flex-direction: column;
+    }
+
+    #shopify-section-{{ section.id }} .newsletter-banner__submit {
+      width: 100%;
+    }
   }
 </style>
 
-<section class="section {% if section.settings.background != settings.background %}section--isolated section--tight{% endif %} section--text-centered" data-section-id="{{ section.id }}" data-section-type="newsletter">
-  <div class="container container--giga-narrow">
+<section class="newsletter-banner" data-section-id="{{ section.id }}" data-section-type="newsletter">
+  <div class="newsletter-banner__overlay">
     {%- if section.settings.title != blank -%}
-      <h2 class="heading h3">{{ section.settings.title | escape }}</h2>
+      <h2 class="newsletter-banner__title">{{ section.settings.title | escape }}</h2>
     {%- endif -%}
 
-    {%- if section.settings.content != blank -%}
-      <div class="rte">
-        {{ section.settings.content }}
-      </div>
+    {%- if section.settings.subtitle != blank -%}
+      <p class="newsletter-banner__subtitle">{{ section.settings.subtitle | escape }}</p>
     {%- endif -%}
 
     {%- assign newsletter_id = 'newsletter-' | append: section.id -%}
 
-    <div class="newsletter newsletter--compact">
-      {%- form 'customer', id: newsletter_id, class: 'form newsletter__form' -%}
-        {%- if form.posted_successfully? -%}
-          <p class="alert alert--success">{{ 'home_page.newsletter.success' | t }}</p>
-        {%- else -%}
-          {%- if form.errors -%}
-            <p class="alert alert--error">{{ form.errors.messages['email'] }}</p>
-          {%- endif -%}
+    {%- form 'customer', id: newsletter_id, class: 'newsletter-banner__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
 
-          <input type="hidden" name="contact[tags]" value="newsletter">
-
-          <div class="form__input-row">
-            <div class="form__input-wrapper form__input-wrapper--labelled">
-              <input type="email" id="newsletter[{{ section.id }}][contact][email]" name="contact[email]" class="form__field {% if section.settings.background != settings.background %}form__field--borderless{% endif %} form__field--text" required>
-              <label for="newsletter[{{ section.id }}][contact][email]" class="form__floating-label">{{ 'home_page.newsletter.input' | t }}</label>
-            </div>
-
-            <button type="submit" class="form__submit button button--primary">{{ 'home_page.newsletter.submit' | t }}</button>
-          </div>
+      {%- if form.posted_successfully? -%}
+        <p class="newsletter-banner__alert newsletter-banner__alert--success">{{ 'home_page.newsletter.success' | t }}</p>
+      {%- else -%}
+        {%- if form.errors -%}
+          <p class="newsletter-banner__alert newsletter-banner__alert--error">{{ form.errors.messages['email'] }}</p>
         {%- endif -%}
-      {%- endform -%}
-    </div>
+
+        <div class="newsletter-banner__form-row">
+          <input
+            type="email"
+            id="newsletter[{{ section.id }}][contact][email]"
+            name="contact[email]"
+            class="newsletter-banner__input"
+            placeholder="{{ section.settings.placeholder | escape }}"
+            required
+            aria-label="{{ section.settings.placeholder | escape }}"
+          >
+          <button type="submit" class="newsletter-banner__submit">{{ section.settings.button_text | escape }}</button>
+        </div>
+      {%- endif -%}
+    {%- endform -%}
   </div>
 </section>
 
@@ -53,27 +161,131 @@
       "content": "Customers who subscribe will have their email address added to the \"accepts marketing\" [customer list](/admin/customers?query=&accepts_marketing=1)."
     },
     {
-      "type": "text",
-      "id": "title",
-      "label": "Heading",
-      "default": "Newsletter"
+      "type": "header",
+      "content": "Background"
     },
     {
-      "type": "richtext",
-      "id": "content",
-      "label": "Text",
-      "default": "<p>A short sentence describing what someone will receive by subscribing</p>"
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
     },
     {
       "type": "color",
       "id": "background",
-      "label": "Background",
-      "default": "#1e2d7d"
+      "label": "Background color (fallback when no image)",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "label": "Section height",
+      "min": 300,
+      "max": 600,
+      "step": 20,
+      "default": 400
+    },
+    {
+      "type": "header",
+      "content": "Overlay box"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "SIGN UP TODAY!"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "GET AN EXCLUSIVE LOOK INTO VIS RACING"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Heading size (px)",
+      "min": 18,
+      "max": 36,
+      "step": 1,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subheading size (px)",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "default": 14
     },
     {
       "type": "color",
-      "id": "text",
-      "label": "Text",
+      "id": "overlay_background",
+      "label": "Overlay background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "overlay_text",
+      "label": "Overlay text",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_padding",
+      "label": "Overlay padding (px)",
+      "min": 24,
+      "max": 60,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "overlay_width",
+      "label": "Overlay max width (px)",
+      "min": 280,
+      "max": 500,
+      "step": 20,
+      "default": 380
+    },
+    {
+      "type": "header",
+      "content": "Form"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email placeholder",
+      "default": "Your e-mail"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "SUBSCRIBE"
+    },
+    {
+      "type": "color",
+      "id": "input_background",
+      "label": "Input background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "input_border",
+      "label": "Input border",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
       "default": "#ffffff"
     }
   ],
