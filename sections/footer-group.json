@@ -61,17 +61,10 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "footer-0": {
-          "type": "text",
-          "settings": {
-            "title": "Contact Us",
-            "content": "<p>Wings West International<br/>(818)350-4418<br/>\t\t\t\t\t\tinfo@wingswest.com\t\t<br/>Mon-Fri 10:00AM to 5:00PM<br/>\t\t\t\t\t\t\t</p>"
-          }
-        },
         "links_UXUfYM": {
           "type": "links",
           "settings": {
-            "menu": ""
+            "menu": "browes"
           }
         },
         "footer-1": {
@@ -86,8 +79,19 @@
             "menu": "customer-service"
           }
         },
+        "footer-0": {
+          "type": "text",
+          "settings": {
+            "title": "Contact Us",
+            "content": "<p>Wings West International<br/>(818)350-4418<br/>\t\t\t\t\t\tinfo@wingswest.com\t\t<br/>Mon-Fri 10:00AM to 5:00PM<br/>\t\t\t\t\t\t\t</p>",
+            "facebook_url": "https://www.facebook.com/",
+            "x_url": "https://x.com/",
+            "instagram_url": "https://www.instagram.com/"
+          }
+        },
         "footer-2": {
           "type": "newsletter",
+          "disabled": true,
           "settings": {
             "title": "Newsletter",
             "subheading": "<p>A short sentence describing what someone will receive by subscribing</p>"
@@ -95,10 +99,10 @@
         }
       },
       "block_order": [
-        "footer-0",
         "links_UXUfYM",
         "footer-1",
         "links_Cz4TtU",
+        "footer-0",
         "footer-2"
       ],
       "custom_css": [],

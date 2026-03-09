@@ -435,6 +435,29 @@
         "include_margins": true
       }
     },
+    "newsletter_VKN8UN": {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "settings": {
+        "background_image": "shopify://shop_images/Screenshot_2025-03-26_153522.png",
+        "background": "#1a1a1a",
+        "section_height": 400,
+        "title": "SIGN UP TODAY!",
+        "subtitle": "GET AN EXCLUSIVE LOOK INTO VIS RACING",
+        "title_size": 24,
+        "subtitle_size": 14,
+        "overlay_background": "#ffffff",
+        "overlay_text": "#000000",
+        "overlay_padding": 40,
+        "overlay_width": 380,
+        "placeholder": "Your e-mail",
+        "button_text": "SUBSCRIBE",
+        "input_background": "#ffffff",
+        "input_border": "#000000",
+        "button_background": "#000000",
+        "button_text_color": "#ffffff"
+      }
+    },
     "offers": {
       "type": "offers",
       "blocks": {
@@ -815,10 +838,22 @@
       "type": "newsletter",
       "disabled": true,
       "settings": {
-        "title": "Let's keep in touch",
-        "content": "<p>Subscribe to our weekly newsletter and receive exclusive offers on products you love!</p>",
         "background": "rgba(0,0,0,0)",
-        "text": "#677279"
+        "section_height": 400,
+        "title": "Let's keep in touch",
+        "subtitle": "GET AN EXCLUSIVE LOOK INTO VIS RACING",
+        "title_size": 24,
+        "subtitle_size": 14,
+        "overlay_background": "#ffffff",
+        "overlay_text": "#000000",
+        "overlay_padding": 40,
+        "overlay_width": 380,
+        "placeholder": "Your e-mail",
+        "button_text": "SUBSCRIBE",
+        "input_background": "#ffffff",
+        "input_border": "#000000",
+        "button_background": "#000000",
+        "button_text_color": "#ffffff"
       }
     },
     "quick-links": {
@@ -894,6 +929,7 @@
     "promotion-list",
     "17661265817c01b9e9",
     "17661290623c47bdfd",
+    "newsletter_VKN8UN",
     "offers",
     "collection-list",
     "featured-collection",
