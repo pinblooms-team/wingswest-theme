@@ -896,8 +896,8 @@
       setupAddToCart() {
         this.addToCartBtns.forEach(btn => {
           btn.addEventListener('click', (e) => {
-            const productId = e.target.dataset.productId;
-            this.addToCart(productId, e.target);
+            const productId = e.currentTarget.dataset.productId;
+            this.addToCart(productId, e.currentTarget);
           });
         });
       }
@@ -906,22 +906,45 @@
         const originalText = button.textContent;
         button.textContent = 'Adding...';
         button.disabled = true;
+        document.dispatchEvent(new CustomEvent('theme:loading:start'));
 
-        fetch('/cart/add.js', {
+        const cartAddUrl = `${window.routes?.cartAddUrl || '/cart/add'}.js`;
+
+        fetch(cartAddUrl, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
           },
+          credentials: 'same-origin',
           body: JSON.stringify({
-            id: productId,
+            id: parseInt(productId, 10),
             quantity: 1
           })
         })
-        .then(response => response.json())
-        .then(data => {
+        .then(response => {
+          button.removeAttribute('disabled');
+          if (!response.ok) {
+            document.dispatchEvent(new CustomEvent('theme:loading:end'));
+            throw new Error('Add to cart failed');
+          }
+          return response.json();
+        })
+        .then(() => {
           button.textContent = 'Added!';
-          window.dispatchEvent(new CustomEvent('cart:refresh'));
-          
+          if (window.theme?.pageType === 'cart' || window.theme?.cartType === 'page') {
+            window.location.href = window.routes.cartUrl;
+            return;
+          }
+          button.dispatchEvent(new CustomEvent('product:added', {
+            bubbles: true,
+            detail: {
+              button: button,
+              variant: null,
+              quantity: 1,
+              productAdded: true
+            }
+          }));
           setTimeout(() => {
             button.textContent = originalText;
             button.disabled = false;
@@ -929,6 +952,7 @@
         })
         .catch(error => {
           console.error('Error adding to cart:', error);
+          document.dispatchEvent(new CustomEvent('theme:loading:end'));
           button.textContent = 'Error';
           setTimeout(() => {
             button.textContent = originalText;

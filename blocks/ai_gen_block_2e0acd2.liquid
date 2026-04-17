@@ -432,22 +432,37 @@
     const original = btn.innerHTML;
     btn.disabled = true;
     btn.innerHTML = 'Adding...';
+    document.dispatchEvent(new CustomEvent('theme:loading:start'));
 
     try {
-      const res = await fetch('/cart/add.js', {
+      const res = await fetch(`${window.routes?.cartAddUrl || '/cart/add'}.js`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        credentials: 'same-origin',
         body: JSON.stringify({
-          id: parseInt(variantId),
+          id: parseInt(variantId, 10),
           quantity: 1
         })
       });
 
+      btn.removeAttribute('disabled');
+
       if (!res.ok) throw new Error();
 
       btn.innerHTML = 'Added!';
-      
-      document.dispatchEvent(new CustomEvent('cart:updated'));
+
+      btn.dispatchEvent(new CustomEvent('product:added', {
+        bubbles: true,
+        detail: {
+          button: btn,
+          variant: null,
+          quantity: 1,
+          productAdded: true
+        }
+      }));
 
       setTimeout(() => {
         btn.innerHTML = original;
@@ -455,6 +470,7 @@
       }, 1500);
 
     } catch (err) {
+      document.dispatchEvent(new CustomEvent('theme:loading:end'));
       btn.innerHTML = 'Error';
       setTimeout(() => {
         btn.innerHTML = original;

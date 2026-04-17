@@ -769,48 +769,52 @@
         try {
           button.disabled = true;
           button.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg> Adding...';
-          
-          const response = await fetch('/cart/add.js', {
+          document.dispatchEvent(new CustomEvent('theme:loading:start'));
+
+          const response = await fetch(`${window.routes?.cartAddUrl || '/cart/add'}.js`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              'X-Requested-With': 'XMLHttpRequest'
             },
+            credentials: 'same-origin',
             body: JSON.stringify({
-              id: parseInt(variantId),
+              id: parseInt(variantId, 10),
               quantity: 1
             })
           });
+
+          button.removeAttribute('disabled');
 
           if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
             throw new Error(errorData.description || 'Failed to add to cart');
           }
 
-          const data = await response.json();
-          
-          // Success feedback
+          await response.json();
+
           button.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Added!';
-          
-          // Dispatch cart update event
-          document.dispatchEvent(new CustomEvent('cart:updated', { 
-            detail: { variantId: variantId, quantity: 1 } 
+
+          button.dispatchEvent(new CustomEvent('product:added', {
+            bubbles: true,
+            detail: {
+              button: button,
+              variant: null,
+              quantity: 1,
+              productAdded: true
+            }
           }));
-          
-          // Update cart drawer/counter if available
-          if (typeof window.updateCartDrawer === 'function') {
-            window.updateCartDrawer();
-          }
-          
-          // Reset button after delay
+
           setTimeout(() => {
             button.innerHTML = originalHTML;
             button.disabled = originalDisabled;
           }, 2000);
-          
+
         } catch (error) {
           console.error('Error adding to cart:', error);
+          document.dispatchEvent(new CustomEvent('theme:loading:end'));
           button.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> Error';
-          
+
           setTimeout(() => {
             button.innerHTML = originalHTML;
             button.disabled = originalDisabled;
