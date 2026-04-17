@@ -11,9 +11,9 @@
     {% assign social_media_count = social_media_count | plus: 1 %}
   {%- endif -%}
 
-  {%- if settings.social_twitter != blank -%}
+  {%- if settings.social_twitter_link != blank -%}
     <li class="social-media__item social-media__item--twitter">
-      <a href="{{ settings.social_twitter | replace_first: 'https://', '' | replace_first: 'http://', '' | prepend: 'https://' }}" target="_blank" rel="noopener" aria-label="{{ 'general.social.follow_label' | t: social_media: 'Twitter' }}">
+      <a href="{{ settings.social_twitter_link | replace_first: 'https://', '' | replace_first: 'http://', '' | prepend: 'https://' }}" target="_blank" rel="noopener" aria-label="{{ 'general.social.follow_label' | t: social_media: 'Twitter' }}">
         {%- render 'icon', icon: 'twitter' -%} {%- if show_social_media_name -%}Twitter{%- endif -%}
       </a>
     </li>
@@ -31,9 +31,9 @@
     {% assign social_media_count = social_media_count | plus: 1 %}
   {%- endif -%}
 
-  {%- if settings.social_instagram != blank -%}
+  {%- if settings.social_instagram_link != blank -%}
     <li class="social-media__item social-media__item--instagram">
-      <a href="{{ settings.social_instagram | replace_first: 'https://', '' | replace_first: 'http://', '' | prepend: 'https://' }}" target="_blank" rel="noopener" aria-label="{{ 'general.social.follow_label' | t: social_media: 'Instagram' }}">
+      <a href="{{ settings.social_instagram_link | replace_first: 'https://', '' | replace_first: 'http://', '' | prepend: 'https://' }}" target="_blank" rel="noopener" aria-label="{{ 'general.social.follow_label' | t: social_media: 'Instagram' }}">
         {%- render 'icon', icon: 'instagram' -%} {%- if show_social_media_name -%}Instagram{%- endif -%}
       </a>
     </li>

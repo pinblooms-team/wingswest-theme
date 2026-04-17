@@ -84,32 +84,39 @@
   }
 
   .ai-featured-products__carousel-{{ ai_gen_id }} {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    posititon: relative;
-  }
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  position: relative;
+  scroll-snap-type: x mandatory;
+  touch-action: pan-x;
+  contain: layout paint;
+}
 
   .ai-featured-products__carousel-{{ ai_gen_id }}::-webkit-scrollbar {
     display: none;
   }
 
-  .ai-featured-products__product-{{ ai_gen_id }} {
-    flex: 0 0 calc((100% - 60px) / 4);
-    text-align: center;
-    position: relative;
-    background-color: #ffffff;
-    border-radius: 8px;
-    overflow: hidden;
-    padding: 0;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-bottom: 10px;
-  }
+ .ai-featured-products__product-{{ ai_gen_id }} {
+  flex: 0 0 calc(25% - 15px); 
+  max-width: calc(25% - 15px); 
+
+  text-align: center;
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 10px;
+
+  scroll-snap-align: start;
+}
 
   .ai-featured-products__product-{{ ai_gen_id }}:hover {
     transform: translateY(-5px);
@@ -135,9 +142,15 @@
     transition: transform 0.3s ease;
   }
 
+  .ai-featured-products__carousel-{{ ai_gen_id }} 
+.ai-featured-products__product-{{ ai_gen_id }}:hover img {
+  transform: scale(1.05);
+}
+  @media screen and (max-width: 768px) {
   .ai-featured-products__product-{{ ai_gen_id }}:hover img {
-    transform: scale(1.05);
+    transform: none;
   }
+}
 
   .ai-featured-products__product-overlay-{{ ai_gen_id }} {
     position: absolute;
@@ -221,6 +234,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    will-change: transform;
+    pointer-events: auto;
     background-color: rgba(255, 255, 255, 0.95);
     color: #333;
     border: 2px solid #e0e0e0;
@@ -231,19 +246,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
     z-index: 1;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
-  .ai-featured-products__nav-{{ ai_gen_id }}:hover:not(:disabled) {
-    background-color: {{ block.settings.tab_active_bg_color }};
-    color: #ffffff;
-    border-color: {{ block.settings.tab_active_bg_color }};
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    transform: translateY(-50%) scale(1.1);
-  }
-
+ .ai-featured-products__nav-{{ ai_gen_id }}:hover:not(:disabled) {
+  background-color: {{ block.settings.tab_active_bg_color }};
+  color: #ffffff;
+  border-color: {{ block.settings.tab_active_bg_color }};
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+  
   .ai-featured-products__nav-{{ ai_gen_id }}:disabled {
     opacity: 0.3;
     cursor: not-allowed;
@@ -274,18 +288,53 @@
       flex: 0 0 calc((100% - 40px) / 3);
     }
   }
+@media screen and (max-width: 768px) {
 
-  @media screen and (max-width: 768px) {
-    .ai-featured-products__product-{{ ai_gen_id }} {
-      flex: 0 0 calc((100% - 20px) / 2);
-    }
-
-
-    .ai-featured-products__nav-{{ ai_gen_id }} {
-      width: 40px;
-      height: 40px;
-    }
+  .ai-featured-products__carousel-{{ ai_gen_id }} {
+    gap: 16px; 
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 16px;
   }
+
+  .ai-featured-products__product-{{ ai_gen_id }} {
+    flex: 0 0 calc(100% - 32px); 
+    max-width: calc(100% - 32px);
+    scroll-snap-align: center;   
+  }
+
+  .ai-featured-products__nav-{{ ai_gen_id }} {
+    width: 40px;
+    height: 40px;
+  }
+}
+ 
+
+  /* MOBILE DROPDOWN */
+.ai-featured-products__dropdown-{{ ai_gen_id }} {
+  display: none;
+  margin-bottom: 20px;
+}
+
+.ai-featured-products__select-{{ ai_gen_id }} {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  background: #fff;
+}
+
+/* MOBILE BEHAVIOR */
+@media (max-width: 768px) {
+  .ai-featured-products__tabs-{{ ai_gen_id }} {
+    display: none;
+  }
+
+  .ai-featured-products__dropdown-{{ ai_gen_id }} {
+    display: block;
+  }
+}
 
   @media screen and (max-width: 749px) {
     .ai-featured-products__tabs-{{ ai_gen_id }} {
@@ -313,8 +362,8 @@
 
 
     .ai-featured-products__nav-{{ ai_gen_id }} {
-      width: 35px;
-      height: 35px;
+      width: 40px;
+      height: 40px;
     }
   }
 {% endstyle %}
@@ -334,6 +383,26 @@
     </div>
 
     {% assign first_active_set = false %}
+     <div class="ai-featured-products__dropdown-{{ ai_gen_id }}">
+  <select class="ai-featured-products__select-{{ ai_gen_id }}">
+    {% assign first_active_set = false %}
+    {% for i in (1..10) %}
+      {% assign tab_enabled_key = 'tab_' | append: i | append: '_enabled' %}
+      {% assign tab_label_key = 'tab_' | append: i | append: '_label' %}
+      {% assign tab_enabled = block.settings[tab_enabled_key] %}
+      {% assign tab_label = block.settings[tab_label_key] %}
+
+      {% if tab_enabled %}
+        <option 
+            value="tab{{ i }}" 
+            {% if forloop.first %}selected{% endif %}
+          >
+            {{ tab_label }}
+          </option>
+      {% endif %}
+    {% endfor %}
+  </select>
+</div>
 
     <div class="ai-featured-products__tabs-{{ ai_gen_id }}" role="tablist">
       {% for i in (1..10) %}
@@ -492,6 +561,7 @@
       }
 
       connectedCallback() {
+       
         this.tabs = this.querySelectorAll('.ai-featured-products__tab-{{ ai_gen_id }}');
         this.contents = this.querySelectorAll('.ai-featured-products__content-{{ ai_gen_id }}');
         
@@ -500,6 +570,7 @@
         }
         
         this.setupTabListeners();
+        this.setupDropdown();
         this.initializeActiveCarousel();
         this.setupResizeObserver();
       }
@@ -524,6 +595,16 @@
           });
         });
       }
+      setupDropdown() {
+  const select = this.querySelector('.ai-featured-products__select-{{ ai_gen_id }}');
+  if (!select) return;
+
+  select.addEventListener('change', (e) => {
+    const targetTab = e.target.value;
+    if (!targetTab) return;
+    this.switchTab(targetTab);
+  });
+}
 
       switchTab(targetTab) {
         // Update tab states
@@ -543,6 +624,10 @@
             this.initializeCarousel(targetTab);
           }
         });
+          const select = this.querySelector('.ai-featured-products__select-{{ ai_gen_id }}');
+          if (select) {
+            select.value = targetTab;
+          }
       }
 
       initializeActiveCarousel() {

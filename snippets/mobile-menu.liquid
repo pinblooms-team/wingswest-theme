@@ -22,6 +22,16 @@
           {%- endfor -%}
         </ul>
       </div>
+   {%- if shop.customer_accounts_enabled -%}
+  <div class="mobile-menu__section mobile-menu__section--loose">
+    <div class="mobile-menu__help-wrapper">
+      {%- render 'icon', icon: 'account' -%}
+      <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">
+        Account
+      </a>
+    </div>
+  </div>
+{%- endif -%}
 
       {%- if section.settings.navigation_phone_number != blank or section.settings.navigation_email != blank -%}
         <div class="mobile-menu__section mobile-menu__section--loose">
@@ -42,6 +52,7 @@
           {%- endif -%}
         </div>
       {%- endif -%}
+      
 
       {%- capture social_media -%}{% render 'social-media', show_social_media_name: true %}{%- endcapture -%}
 

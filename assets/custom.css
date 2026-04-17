@@ -328,6 +328,16 @@ li.nav-bar__item:nth-child(2) .nav-bar__link.link.active {
 li.nav-bar__item:nth-child(2) .nav-bar__link.link.active:hover{
   background:#0003;
 }
+.header__action-list .header_mail_icon .header__action-item .icon-state__primary, .header_user_icon span{
+    display: flex;
+}
+.header__action-list .header_user_icon .header__action-item {
+    margin: 0;
+    padding: 0;
+}
+.header__action-item.custom-user-icon {
+    padding-right: 0;
+}
 @media screen and (max-width: 1199px) {
   .nav-bar__linklist{
     gap:5px;
@@ -338,7 +348,27 @@ li.nav-bar__item:nth-child(2) .nav-bar__link.link.active:hover{
   }
 }
 
+@media screen and (max-width: 999.9px) {
+  .custom_search_box svg ~ span {
+      display: none;
+  }
+  button#sdrw-fake-bar.custom_search_box {
+      display: block !important;
+  }
+  button#sdrw-fake-bar.custom_search_box {
+    display: flex !important;
+    width: unset;
+    min-width: 20px;
+    padding: 5px;
+    order: unset !important;
+}
+}
+
+
 @media screen and (max-width: 767px) {
+  .header__inner{
+    gap: 10px !important
+  }
   .header__search-bar-wrapper{
     max-width: 100%;
   }
@@ -511,9 +541,27 @@ div .header__logo-image{
 .faq__answer {
     margin: 10px;
 }
+.easysearch-holder .easysearch-select-holder:before {
+    bottom: 8px;
+}
 
 }
 @media screen and (max-width: 639px) {
+  .cart-wrapper__inner .card .table {
+    margin-left: 0;
+}
+.cart-wrapper__inner .card .table td, .cart-wrapper__inner .card .table th {
+    padding-right: 0;
+}
+.button--large{
+  line-height: 40px;
+}
+.estimate-shipping__toggle, .card__section, .card__collapsible-button{
+  padding: 10px;
+}
+.estimate-shipping__collapsible .shipping-estimator {
+    padding: 0 10px 20px;
+}
 .faq__answer h1 {
     font-size: 17px;
     font-weight: 600;
@@ -549,4 +597,34 @@ div .header__logo-image{
 .icon--wishlist-star {
   width: 24px;
   height: 24px;
+}
+@media screen and (max-width: 370px) {
+  .header__action-item:last-child, .header_user_icon {
+      padding-right: 3px;
+  }
+  .header__action-item {
+      padding: 0 10px;
+  }
+  button#sdrw-fake-bar.custom_search_box{
+        padding-left:0px;
+  }
+
+}
+
+.mobile-menu__help-wrapper{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.mobile-menu__help-wrapper svg{
+  width:20px;
+  height:20px;
+  flex-shrink:0;
+  vertical-align:middle;
+}
+
+.mobile-menu__help-wrapper a,
+.mobile-menu__help-wrapper span{
+  line-height:1.4;
 }

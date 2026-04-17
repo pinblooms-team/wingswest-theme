@@ -7,19 +7,19 @@
     {% else %}
       background-color: {{ section.settings.background }};
     {% endif %}
-    min-height: {{ section.settings.section_height }}px;
+  }
+.newsletter-inner{
+   min-height: {{ section.settings.section_height }}px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: 40px 0;
-  }
 
+}
   #shopify-section-{{ section.id }} .newsletter-banner__overlay {
     background: {{ section.settings.overlay_background }};
     color: {{ section.settings.overlay_text }};
     padding: {{ section.settings.overlay_padding }}px;
     max-width: {{ section.settings.overlay_width }}px;
-    margin-right: 40px;
   }
 
   #shopify-section-{{ section.id }} .newsletter-banner__title {
@@ -50,6 +50,7 @@
     flex: 1;
     min-width: 0;
     height: 48px;
+    min-height: 48px;
     padding: 0 16px;
     border: 1px solid {{ section.settings.input_border }};
     background: {{ section.settings.input_background }};
@@ -93,62 +94,66 @@
   }
 
   @media screen and (max-width: 749px) {
-    #shopify-section-{{ section.id }} .newsletter-banner {
-      justify-content: center;
-      padding: 30px 20px;
-    }
 
     #shopify-section-{{ section.id }} .newsletter-banner__overlay {
-      margin-right: 0;
       max-width: 100%;
+      padding: 20px;
     }
 
     #shopify-section-{{ section.id }} .newsletter-banner__form-row {
       flex-direction: column;
+      gap: 15px;
     }
 
     #shopify-section-{{ section.id }} .newsletter-banner__submit {
       width: 100%;
     }
+    .newsletter-inner{
+    min-height: 320px;}
+    
   }
 </style>
 
 <section class="newsletter-banner" data-section-id="{{ section.id }}" data-section-type="newsletter">
-  <div class="newsletter-banner__overlay">
-    {%- if section.settings.title != blank -%}
-      <h2 class="newsletter-banner__title">{{ section.settings.title | escape }}</h2>
-    {%- endif -%}
-
-    {%- if section.settings.subtitle != blank -%}
-      <p class="newsletter-banner__subtitle">{{ section.settings.subtitle | escape }}</p>
-    {%- endif -%}
-
-    {%- assign newsletter_id = 'newsletter-' | append: section.id -%}
-
-    {%- form 'customer', id: newsletter_id, class: 'newsletter-banner__form' -%}
-      <input type="hidden" name="contact[tags]" value="newsletter">
-
-      {%- if form.posted_successfully? -%}
-        <p class="newsletter-banner__alert newsletter-banner__alert--success">{{ 'home_page.newsletter.success' | t }}</p>
-      {%- else -%}
-        {%- if form.errors -%}
-          <p class="newsletter-banner__alert newsletter-banner__alert--error">{{ form.errors.messages['email'] }}</p>
+  <div class="container">
+      <div class="newsletter-inner">
+        <div class="newsletter-banner__overlay">
+        {%- if section.settings.title != blank -%}
+          <h2 class="newsletter-banner__title">{{ section.settings.title | escape }}</h2>
         {%- endif -%}
 
-        <div class="newsletter-banner__form-row">
-          <input
-            type="email"
-            id="newsletter[{{ section.id }}][contact][email]"
-            name="contact[email]"
-            class="newsletter-banner__input"
-            placeholder="{{ section.settings.placeholder | escape }}"
-            required
-            aria-label="{{ section.settings.placeholder | escape }}"
-          >
-          <button type="submit" class="newsletter-banner__submit">{{ section.settings.button_text | escape }}</button>
-        </div>
-      {%- endif -%}
-    {%- endform -%}
+        {%- if section.settings.subtitle != blank -%}
+          <p class="newsletter-banner__subtitle">{{ section.settings.subtitle | escape }}</p>
+        {%- endif -%}
+
+        {%- assign newsletter_id = 'newsletter-' | append: section.id -%}
+
+        {%- form 'customer', id: newsletter_id, class: 'newsletter-banner__form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+
+          {%- if form.posted_successfully? -%}
+            <p class="newsletter-banner__alert newsletter-banner__alert--success">{{ 'home_page.newsletter.success' | t }}</p>
+          {%- else -%}
+            {%- if form.errors -%}
+              <p class="newsletter-banner__alert newsletter-banner__alert--error">{{ form.errors.messages['email'] }}</p>
+            {%- endif -%}
+
+            <div class="newsletter-banner__form-row">
+              <input
+                type="email"
+                id="newsletter[{{ section.id }}][contact][email]"
+                name="contact[email]"
+                class="newsletter-banner__input"
+                placeholder="{{ section.settings.placeholder | escape }}"
+                required
+                aria-label="{{ section.settings.placeholder | escape }}"
+              >
+              <button type="submit" class="newsletter-banner__submit">{{ section.settings.button_text | escape }}</button>
+            </div>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+      </div>
   </div>
 </section>
 

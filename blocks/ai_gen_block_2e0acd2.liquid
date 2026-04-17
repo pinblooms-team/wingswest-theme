@@ -16,6 +16,49 @@
     margin: 0 auto;
   }
 
+.ai-product-slider__overlay-{{ ai_gen_id }} {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.ai-product-slider__card-{{ ai_gen_id }}:hover 
+.ai-product-slider__overlay-{{ ai_gen_id }} {
+  opacity: 1;
+}
+
+/* BUTTON (MATCH FEATURED EXACTLY) */
+.ai-product-slider__add-to-cart-{{ ai_gen_id }} {
+  background-color: #ffffff;
+    color: #333333;
+    border: none;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* HOVER = RED (like featured) */
+.ai-product-slider__add-to-cart-{{ ai_gen_id }}:hover {
+ background-color: {{ block.settings.tab_active_bg_color }};
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
   .ai-product-slider__header-{{ ai_gen_id }} {
     text-align: center;
     margin-bottom: 30px;
@@ -50,22 +93,36 @@
     -ms-overflow-style: none;
     display: flex;
     gap: {{ block.settings.card_spacing }}px;
+    touch-action: pan-x;
+    will-change: transform; 
   }
+  .ai-product-slider__carousel-{{ ai_gen_id }} {
+   transform: translateZ(0);
+  }
+
+.ai-product-slider__add-to-cart-{{ ai_gen_id }} {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 
   .ai-product-slider__carousel-{{ ai_gen_id }}::-webkit-scrollbar {
     display: none;
   }
 
-  .ai-product-slider__card-{{ ai_gen_id }} {
-    flex: 0 0 calc((100% - ({{ block.settings.card_spacing }}px * 3)) / 4);
-    background-color: {{ block.settings.card_background }};
-    border-radius: {{ block.settings.card_border_radius }}px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    margin-bottom: 10px;
-  }
+.ai-product-slider__card-{{ ai_gen_id }} {
+  flex: 0 0 calc((100% - ({{ block.settings.card_spacing }}px * 3)) / 4);
+  max-width: calc((100% - ({{ block.settings.card_spacing }}px * 3)) / 4);
 
+  background-color: {{ block.settings.card_background }};
+  border-radius: {{ block.settings.card_border_radius }}px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 10px;
+
+  scroll-snap-align: start;
+}
   .ai-product-slider__card-{{ ai_gen_id }}:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
@@ -211,20 +268,38 @@
     }
   }
 
-  @media screen and (max-width: 600px) {
-    .ai-product-slider__card-{{ ai_gen_id }} {
-      flex: 0 0 100%;
-    }
+ @media screen and (max-width: 600px) {
 
-    .ai-product-slider__title-{{ ai_gen_id }} {
-      font-size: {{ block.settings.heading_size | times: 0.7 }}px;
-    }
-
-    .ai-product-slider__nav-button-{{ ai_gen_id }} {
-      width: 35px;
-      height: 35px;
-    }
+  .ai-product-slider__carousel-{{ ai_gen_id }} {
+    gap: 16px; 
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 16px; 
   }
+
+  .ai-product-slider__card-{{ ai_gen_id }} {
+    flex: 0 0 calc(100% - 32px); 
+    max-width: calc(100% - 32px);
+    scroll-snap-align: center;  
+  }
+
+  .ai-product-slider__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size | times: 0.7 }}px;
+  }
+
+  .ai-product-slider__nav-button-{{ ai_gen_id }} {
+    width: 35px;
+    height: 35px;
+    -webkit-tap-highlight-color: transparent;
+    transform: translateY(-50%);
+  }
+
+  .ai-product-slider__nav-button-{{ ai_gen_id }}:hover,
+  .ai-product-slider__nav-button-{{ ai_gen_id }}:active {
+    transform: translateY(-50%);
+  }
+}
+}
 {% endstyle %}
 
 <product-slider-{{ ai_gen_id }} class="ai-product-slider-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
@@ -256,20 +331,36 @@
               <a href="{{ product.url }}" class="ai-product-slider__card-link-{{ ai_gen_id }}">
                 <div class="ai-product-slider__image-wrapper-{{ ai_gen_id }}">
                   {% if product.featured_image %}
-                    <img
-                      src="{{ product.featured_image | image_url: width: 600 }}"
-                      alt="{{ product.featured_image.alt | escape }}"
-                      class="ai-product-slider__image-{{ ai_gen_id }}"
-                      loading="lazy"
-                      width="600"
-                      height="600"
-                    >
-                  {% else %}
-                    <div class="ai-product-slider__image-placeholder-{{ ai_gen_id }}">
-                      {{ 'product-1' | placeholder_svg_tag }}
-                    </div>
-                  {% endif %}
-                </div>
+                      <img
+      src="{{ product.featured_image | image_url: width: 600 }}"
+      alt="{{ product.featured_image.alt | escape }}"
+      class="ai-product-slider__image-{{ ai_gen_id }}"
+      loading="lazy"
+      width="600"
+      height="600"
+    >
+  {% else %}
+    <div class="ai-product-slider__image-placeholder-{{ ai_gen_id }}">
+      {{ 'product-1' | placeholder_svg_tag }}
+    </div>
+  {% endif %}
+
+
+  <div class="ai-product-slider__overlay-{{ ai_gen_id }}">
+    <button 
+      type="button"
+      class="ai-product-slider__add-to-cart-{{ ai_gen_id }}"
+      data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
+      ADD TO CART
+    </button>
+  </div>
+</div>
                 <div class="ai-product-slider__card-content-{{ ai_gen_id }}">
                   <h3 class="ai-product-slider__product-title-{{ ai_gen_id }}">{{ product.title }}</h3>
                   <p class="ai-product-slider__product-price-{{ ai_gen_id }}">{{ product.price | money }}</p>
@@ -312,34 +403,96 @@
         if (!this.carousel) return;
 
         this.setupEventListeners();
+        this.setupAddToCart(); 
         this.updateButtonStates();
       }
 
       setupEventListeners() {
         this.prevButton.addEventListener('click', () => this.scroll('prev'));
         this.nextButton.addEventListener('click', () => this.scroll('next'));
-        this.carousel.addEventListener('scroll', () => this.updateButtonStates());
+        this.carousel.addEventListener('scroll', () => {
+          clearTimeout(this.scrollTimeout);
+          this.scrollTimeout = setTimeout(() => {
+            this.updateButtonStates();
+          }, 120);
+        });
       }
 
-      scroll(direction) {
-        const cardWidth = this.carousel.querySelector('.ai-product-slider__card-{{ ai_gen_id }}').offsetWidth;
-        const gap = {{ block.settings.card_spacing }};
-        const scrollAmount = cardWidth + gap;
+      setupAddToCart() {
+  this.addEventListener('click', async (e) => {
+    const btn = e.target.closest('.ai-product-slider__add-to-cart-{{ ai_gen_id }}');
+    if (!btn) return;
 
-        if (direction === 'prev') {
-          this.carousel.scrollLeft -= scrollAmount;
-        } else {
-          this.carousel.scrollLeft += scrollAmount;
-        }
-      }
+    e.preventDefault();
+    e.stopPropagation();
 
-      updateButtonStates() {
-        const isAtStart = this.carousel.scrollLeft <= 0;
-        const isAtEnd = this.carousel.scrollLeft + this.carousel.offsetWidth >= this.carousel.scrollWidth - 1;
+    const variantId = btn.getAttribute('data-variant-id');
+    if (!variantId) return;
 
-        this.prevButton.disabled = isAtStart;
-        this.nextButton.disabled = isAtEnd;
-      }
+    const original = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = 'Adding...';
+
+    try {
+      const res = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: parseInt(variantId),
+          quantity: 1
+        })
+      });
+
+      if (!res.ok) throw new Error();
+
+      btn.innerHTML = 'Added!';
+      
+      document.dispatchEvent(new CustomEvent('cart:updated'));
+
+      setTimeout(() => {
+        btn.innerHTML = original;
+        btn.disabled = false;
+      }, 1500);
+
+    } catch (err) {
+      btn.innerHTML = 'Error';
+      setTimeout(() => {
+        btn.innerHTML = original;
+        btn.disabled = false;
+      }, 1500);
+    }
+  });
+}
+
+   scroll(direction) {
+  const card = this.carousel.querySelector('.ai-product-slider__card-{{ ai_gen_id }}');
+  if (!card) return;
+
+  const gap = {{ block.settings.card_spacing }};
+  const scrollAmount = card.offsetWidth + gap;
+
+  const newScroll =
+    direction === 'prev'
+      ? this.carousel.scrollLeft - scrollAmount
+      : this.carousel.scrollLeft + scrollAmount;
+
+  this.carousel.scrollTo({
+    left: newScroll,
+    behavior: 'smooth'
+  });
+}
+
+     updateButtonStates() {
+  const threshold = 10;
+
+  const isAtStart = this.carousel.scrollLeft <= threshold;
+  const isAtEnd =
+    this.carousel.scrollLeft + this.carousel.clientWidth >=
+    this.carousel.scrollWidth - threshold;
+
+  this.prevButton.disabled = isAtStart;
+  this.nextButton.disabled = isAtEnd;
+}
     }
 
     customElements.define('product-slider-{{ ai_gen_id }}', ProductSlider{{ ai_gen_id }});
@@ -473,6 +626,12 @@
       "label": "Card border radius",
       "default": 8
     },
+  {
+    "type": "color",
+    "id": "tab_active_bg_color",
+    "label": "Primary accent color",
+    "default": "#ff4757"
+  },
     {
       "type": "range",
       "id": "desktop_width_percent",
